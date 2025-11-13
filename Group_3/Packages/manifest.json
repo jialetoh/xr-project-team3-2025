@@ -9,7 +9,7 @@
     }
   ],
   "dependencies": {
-    "com.meta.xr.sdk.all": "78.0.0",
+    "com.meta.xr.sdk.all": "81.0.0",
     "com.meta.xr.sdk.interaction.ovr": "78.0.0",
     "com.meta.xr.simulator": "78.0.0",
     "com.nickmaltbie.openkcc": "1.5.0",
@@ -39,9 +39,9 @@
     "com.unity.transport": "2.5.3",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.7",
-    "com.veriorpies.parrelsync": "https://github.com/VeriorPies/ParrelSync.git?path=/ParrelSync",
     "com.unity.xr.management": "4.5.2",
     "com.unity.xr.openxr": "1.15.1",
+    "com.veriorpies.parrelsync": "https://github.com/VeriorPies/ParrelSync.git?path=/ParrelSync",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
