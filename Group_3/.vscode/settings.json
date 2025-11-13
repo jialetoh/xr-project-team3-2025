@@ -3,8 +3,10 @@
         "behaviour",
         "lerp",
         "maltbie",
+        "mathf",
         "navmesh",
         "nickmaltbie",
+        "pathfinding",
         "rigidbody",
     ],
     "files.exclude": {
