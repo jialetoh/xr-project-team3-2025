@@ -1,4 +1,14 @@
 {
+    "cSpell.ignoreWords": [
+        "behaviour",
+        "lerp",
+        "maltbie",
+        "mathf",
+        "navmesh",
+        "nickmaltbie",
+        "pathfinding",
+        "rigidbody",
+    ],
     "files.exclude": {
         "**/.DS_Store": true,
         "**/.git": true,
