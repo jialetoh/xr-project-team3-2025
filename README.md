@@ -1,2 +1,4 @@
-# xr-project-team3-2025
-Github Project Repository for 50.052 Extended Reality
+# WARNING THIS BRANCH DOES NOT CONTAIN THE CORRUPTED PROJECT
+
+# VR Boxhead Game
+An XR Project by Team 3 for 50.052 Extended Reality
