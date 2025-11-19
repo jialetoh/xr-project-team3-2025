@@ -7,7 +7,9 @@
         "navmesh",
         "nickmaltbie",
         "pathfinding",
+        "poolable",
         "rigidbody",
+        "scriptable",
     ],
     "files.exclude": {
         "**/.DS_Store": true,
