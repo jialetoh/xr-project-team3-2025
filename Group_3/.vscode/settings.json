@@ -1,6 +1,8 @@
 {
     "cSpell.ignoreWords": [
         "behaviour",
+        "damageable",
+        "damageables",
         "lerp",
         "maltbie",
         "mathf",
@@ -10,6 +12,7 @@
         "poolable",
         "rigidbody",
         "scriptable",
+        "slerp",
     ],
     "files.exclude": {
         "**/.DS_Store": true,

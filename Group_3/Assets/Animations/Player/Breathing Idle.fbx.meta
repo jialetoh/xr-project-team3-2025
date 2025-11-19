@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 714ee28e20e954dd9ae8bbf83df29641
+guid: ae7912f12417447a38c589b6eae13b59
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch03_Body
+    second: {fileID: -5116467536759905631, guid: 28dbdd6fc901f405c9a1be7d332292e8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -31,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Breathing Idle
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 298
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

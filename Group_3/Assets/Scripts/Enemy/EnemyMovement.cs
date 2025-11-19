@@ -53,11 +53,6 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        StartCoroutine(FollowTarget());
-    }
-
     private void HandleLinkStart()
     {
         Animator.SetTrigger(MovementState.Jumping.ToString());

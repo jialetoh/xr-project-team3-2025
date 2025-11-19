@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ch03_Body
-    second: {fileID: -5116467536759905631, guid: ccd4464c57d244c889dcbb2ba9d91d93, type: 3}
+    second: {fileID: -5116467536759905631, guid: 28dbdd6fc901f405c9a1be7d332292e8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -36,7 +36,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Falling
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0

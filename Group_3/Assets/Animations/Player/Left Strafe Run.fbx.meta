@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ae7912f12417447a38c589b6eae13b59
+guid: 8beb8f8bba1a04f7eb3a5877914d185d
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ch03_Body
-    second: {fileID: 2100000, guid: 259d2f8a1e6e24197b67bd4862cf2e7f, type: 2}
+    second: {fileID: -5116467536759905631, guid: 28dbdd6fc901f405c9a1be7d332292e8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Left Strafe Run
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 298
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

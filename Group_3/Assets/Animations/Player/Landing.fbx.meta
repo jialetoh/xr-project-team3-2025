@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ccd4464c57d244c889dcbb2ba9d91d93
+guid: 8670cfd69234846faa981e7d3d1bc891
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ch03_Body
-    second: {fileID: 2100000, guid: 5448a67c16da841c38ccd4803f62abc5, type: 2}
+    second: {fileID: -5116467536759905631, guid: 28dbdd6fc901f405c9a1be7d332292e8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -36,20 +36,20 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Landing
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 21
+      lastFrame: 11
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0

@@ -10,8 +10,15 @@ using UnityEngine.AI;
 [CreateAssetMenu(fileName = "Enemy Configuration", menuName = "ScriptableObject/Enemy Configuration")]
 public class EnemyScriptableObject : ScriptableObject
 {
+    [Header("Enemy Stats")]
     [Tooltip("The base health of the enemy")]
     public int Health = 100;
+    [Tooltip("The time delay between enemy attacks")]
+    public float AttackDelay = 1f;
+    [Tooltip("The damage dealt by the enemy per attack")]
+    public int Damage = 5;
+    [Tooltip("The radius within which the enemy can attack")]
+    public float AttackRadius = 1.5f;
 
     [Header("NavMesh Agent Settings")]
     [Tooltip("The interval at which the AI updates its pathfinding")]

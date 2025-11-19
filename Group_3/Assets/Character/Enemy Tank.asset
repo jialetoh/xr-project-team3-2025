@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c85b32b5876e4cd7a63d2e57622add5, type: 3}
   m_Name: Enemy Tank
   m_EditorClassIdentifier: Assembly-CSharp::EnemyScriptableObject
-  Health: 100
+  Health: 1000
+  AttackDelay: 1
+  Damage: 10
+  AttackRadius: 1.5
   AIUpdateInterval: 0.1
   Acceleration: 8
   AngularSpeed: 120
@@ -22,5 +25,5 @@ MonoBehaviour:
   Height: 2
   ObstacleAvoidanceType: 3
   Radius: 0.5
-  Speed: 2.5
+  Speed: 2
   StoppingDistance: 0.5

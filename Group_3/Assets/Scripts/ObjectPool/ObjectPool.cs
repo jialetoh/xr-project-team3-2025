@@ -42,11 +42,8 @@ public class ObjectPool
     public PoolableObject GetObject()
     {
         PoolableObject instance = availableObjectsPool[0];
-
         availableObjectsPool.RemoveAt(0);
-
         instance.gameObject.SetActive(true);
-
         return instance;
     }
 
