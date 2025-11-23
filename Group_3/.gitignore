@@ -106,6 +106,7 @@ mono_crash.*
 # Unity IL2CPP build artifacts (do not ship)
 *_BackUpThisFolder_ButDontShipItWithYourGame/
 *_BurstDebugInformation_DoNotShip/
+testrun_backup/
 
 # Crashlytics generated file
 crashlytics-build.properties
