@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb948c7636c52451e9fa65f46b86e40d, type: 3}
+  m_Name: Enemy Tank Attack
+  m_EditorClassIdentifier: Assembly-CSharp::AttackScriptableObject
+  IsRanged: 1
+  Damage: 50
+  AttackRadius: 10
+  AttackDelay: 2.5
+  FireballPrefab: {fileID: 5487443417038037780, guid: 45eaa97ea035c486484a2581dd7c84bf, type: 3}
+  SpawnHeightOffset: 1.1
+  LineOfSightLayers:
+    serializedVersion: 2
+    m_Bits: 129

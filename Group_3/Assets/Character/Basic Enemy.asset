@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c85b32b5876e4cd7a63d2e57622add5, type: 3}
   m_Name: Basic Enemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyScriptableObject
+  Prefab: {fileID: -2446827512552518953, guid: 5bb866e964e0f4e559e2d63706df28b5, type: 3}
+  AttackConfiguration: {fileID: 11400000, guid: d6b8766e8f1a24eceb5d066f3da67b3b, type: 2}
   Health: 100
   AttackDelay: 1
   Damage: 5
   AttackRadius: 1.5
+  HasRangedAttack: 0
   AIUpdateInterval: 0.1
   Acceleration: 8
   AngularSpeed: 120
@@ -25,5 +28,5 @@ MonoBehaviour:
   Height: 2
   ObstacleAvoidanceType: 3
   Radius: 0.5
-  Speed: 3
+  Speed: 3.5
   StoppingDistance: 0.5

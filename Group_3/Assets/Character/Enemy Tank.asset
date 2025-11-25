@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c85b32b5876e4cd7a63d2e57622add5, type: 3}
   m_Name: Enemy Tank
   m_EditorClassIdentifier: Assembly-CSharp::EnemyScriptableObject
+  Prefab: {fileID: 3237888490003597961, guid: a456792f0525748929c4cef21b6ed866, type: 3}
+  AttackConfiguration: {fileID: 11400000, guid: 81ff9ad885ae14eefa1a7b92f33382fb, type: 2}
   Health: 1000
-  AttackDelay: 1
-  Damage: 10
-  AttackRadius: 1.5
+  AttackDelay: 2.5
+  Damage: 50
+  AttackRadius: 10
+  HasRangedAttack: 1
   AIUpdateInterval: 0.1
   Acceleration: 8
   AngularSpeed: 120
@@ -25,5 +28,5 @@ MonoBehaviour:
   Height: 2
   ObstacleAvoidanceType: 3
   Radius: 0.5
-  Speed: 2
+  Speed: 3
   StoppingDistance: 0.5

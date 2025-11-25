@@ -5,50 +5,63 @@ using UnityEngine;
 
 public class ObjectPool
 {
+    [Tooltip("The parent object for pooled instances.")]
+    private GameObject Parent;
     [Tooltip("The prefab to use for the pool.")]
-    private PoolableObject prefab;
+    private PoolableObject Prefab;
     [Tooltip("The size of the object pool.")]
-    private int size;
+    private int Size;
     [Tooltip("List of available objects in the pool.")]
-    private List<PoolableObject> availableObjectsPool;
+    private List<PoolableObject> AvailableObjectsPool;
 
-    private ObjectPool(PoolableObject prefab, int size)
+    private ObjectPool(PoolableObject Prefab, int Size)
     {
-        this.prefab = prefab;
-        this.size = size;
-        availableObjectsPool = new List<PoolableObject>(size);
+        this.Prefab = Prefab;
+        this.Size = Size;
+        AvailableObjectsPool = new List<PoolableObject>(Size);
     }
 
-    public static ObjectPool CreateInstance(PoolableObject prefab, int size)
+    public static ObjectPool CreateInstance(PoolableObject Prefab, int Size)
     {
-        ObjectPool pool = new ObjectPool(prefab, size);
-
-        GameObject poolGameObject = new GameObject(prefab + " Pool");
-        pool.CreateObjects(poolGameObject);
+        ObjectPool pool = new(Prefab, Size)
+        {
+            Parent = new GameObject(Prefab + " Pool")
+        };
+        pool.CreateObjects();
 
         return pool;
     }
 
-    private void CreateObjects(GameObject parent)
+    private void CreateObjects()
     {
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < Size; i++)
         {
-            PoolableObject poolableObject = GameObject.Instantiate(prefab, Vector3.zero, Quaternion.identity, parent.transform);
-            poolableObject.Parent = this;
-            poolableObject.gameObject.SetActive(false); // PoolableObject handles re-adding the object to the AvailableObjects
+            CreateObject();
         }
+    }
+
+    private void CreateObject()
+    {
+        PoolableObject poolableObject = Object.Instantiate(Prefab, Vector3.zero, Quaternion.identity, Parent.transform);
+        poolableObject.Parent = this;
+        poolableObject.gameObject.SetActive(false); // PoolableObject handles re-adding the object to the AvailableObjects
     }
 
     public PoolableObject GetObject()
     {
-        PoolableObject instance = availableObjectsPool[0];
-        availableObjectsPool.RemoveAt(0);
+        if (AvailableObjectsPool.Count == 0) // auto expand pool size if out of objects
+        {
+            CreateObject();
+        }
+
+        PoolableObject instance = AvailableObjectsPool[0];
+        AvailableObjectsPool.RemoveAt(0);
         instance.gameObject.SetActive(true);
         return instance;
     }
 
     public void ReturnObjectToPool(PoolableObject Object)
     {
-        availableObjectsPool.Add(Object);
+        AvailableObjectsPool.Add(Object);
     }
 }

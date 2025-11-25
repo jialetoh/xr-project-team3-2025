@@ -10,6 +10,12 @@ using UnityEngine.AI;
 [CreateAssetMenu(fileName = "Enemy Configuration", menuName = "ScriptableObject/Enemy Configuration")]
 public class EnemyScriptableObject : ScriptableObject
 {
+    [Header("Prefab")]
+    [Tooltip("The enemy prefab associated with this configuration.")]
+    public Enemy Prefab;
+    [Tooltip("The attack configuration associated with this enemy.")]
+    public AttackScriptableObject AttackConfiguration;
+
     [Header("Enemy Stats")]
     [Tooltip("The base health of the enemy")]
     public int Health = 100;
@@ -19,6 +25,8 @@ public class EnemyScriptableObject : ScriptableObject
     public int Damage = 5;
     [Tooltip("The radius within which the enemy can attack")]
     public float AttackRadius = 1.5f;
+    [Tooltip("Does the enemy have a ranged attack?")]
+    public bool HasRangedAttack = false;
 
     [Header("NavMesh Agent Settings")]
     [Tooltip("The interval at which the AI updates its pathfinding")]
@@ -48,4 +56,31 @@ public class EnemyScriptableObject : ScriptableObject
     public float Speed = 3f;
     [Tooltip("The stopping distance of the NavMesh agent")]
     public float StoppingDistance = 0.5f;
+
+    public void SetUpEnemy(Enemy enemy)
+    {
+        enemy.Agent.acceleration = Acceleration;
+        enemy.Agent.angularSpeed = AngularSpeed;
+        enemy.Agent.areaMask = AreaMask;
+        enemy.Agent.avoidancePriority = AvoidancePriority;
+        enemy.Agent.baseOffset = BaseOffset;
+        enemy.Agent.height = Height;
+        enemy.Agent.obstacleAvoidanceType = ObstacleAvoidanceType;
+        enemy.Agent.radius = Radius;
+        enemy.Agent.speed = Speed;
+        enemy.Agent.stoppingDistance = StoppingDistance;
+
+        enemy.Movement.UpdateRate = AIUpdateInterval;
+        // enemy.Movement.DefaultState = DefaultState;
+        // enemy.Movement.IdleMovespeedMultiplier = IdleMovespeedMultiplier;
+        // enemy.Movement.IdleLocationRadius = IdleLocationRadius;
+        // enemy.Movement.Waypoints = new Vector3[Waypoints];
+        // enemy.Movement.LineOfSightChecker.FieldOfView = FieldOfView;
+        // enemy.Movement.LineOfSightChecker.Collider.radius = LineOfSightRange;
+        // enemy.Movement.LineOfSightChecker.LineOfSightLayers = AttackConfiguration.LineOfSightLayers;
+
+        enemy.Health = Health;
+
+        AttackConfiguration.SetupEnemy(enemy);
+    }
 }

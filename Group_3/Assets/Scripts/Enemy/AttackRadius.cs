@@ -15,9 +15,9 @@ public class AttackRadius : MonoBehaviour
     [Tooltip("Event triggered when an attack occurs.")]
     public AttackEvent OnAttack;
     [Tooltip("Coroutine handling the attack process.")]
-    private Coroutine AttackCoroutine;
+    protected Coroutine AttackCoroutine;
     [Tooltip("The list of damageable targets within the attack radius.")]
-    private List<IDamageable> Damageables = new();
+    protected List<IDamageable> Damageables = new();
 
     [Header("Attack Settings")]
     [Tooltip("The damage dealt to each damageable target.")]
@@ -25,23 +25,25 @@ public class AttackRadius : MonoBehaviour
     [Tooltip("The delay between consecutive attacks.")]
     public float AttackDelay = 0.5f;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Collider = GetComponent<SphereCollider>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<IDamageable>(out var damageable))
+        if (other.TryGetComponent(out IDamageable damageable))
         {
             Damageables.Add(damageable);
-            AttackCoroutine ??= StartCoroutine(Attack());
+
+            if (AttackCoroutine == null)
+                AttackCoroutine = StartCoroutine(Attack());
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<IDamageable>(out var damageable))
+        if (other.TryGetComponent(out IDamageable damageable))
         {
             Damageables.Remove(damageable);
             if (Damageables.Count == 0)
@@ -52,11 +54,19 @@ public class AttackRadius : MonoBehaviour
         }
     }
 
-    private IEnumerator Attack()
+    public void Reset()
+    {
+        Damageables.Clear();
+        if (AttackCoroutine != null)
+        {
+            StopCoroutine(AttackCoroutine);
+            AttackCoroutine = null;
+        }
+    }
+
+    protected virtual IEnumerator Attack()
     {
         WaitForSeconds Wait = new(AttackDelay);
-
-        yield return Wait;
 
         IDamageable closestDamageable = null;
         float closestDistance = float.MaxValue;
@@ -92,7 +102,7 @@ public class AttackRadius : MonoBehaviour
         AttackCoroutine = null;
     }
 
-    private bool DisabledDamageables(IDamageable Damageable)
+    protected bool DisabledDamageables(IDamageable Damageable)
     {
         return Damageable != null && !Damageable.GetTransform().gameObject.activeSelf;
     }

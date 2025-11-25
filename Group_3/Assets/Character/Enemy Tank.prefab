@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6196051600979635416}
   - component: {fileID: 5008152199063208315}
-  - component: {fileID: 2325437154138262738}
-  m_Layer: 10
+  - component: {fileID: 9045077299759496329}
+  m_Layer: 11
   m_Name: Attack Radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,9 +52,9 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2325437154138262738
+--- !u!114 &9045077299759496329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,81 +63,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1570020749730476517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd0d55bd39e9f48458bcf0002a14e904, type: 3}
+  m_Script: {fileID: 11500000, guid: 6989e11202fe94143b73765752fd1466, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackRadius
+  m_EditorClassIdentifier: Assembly-CSharp::RangedAttackRadius
   Collider: {fileID: 5008152199063208315}
-  Damage: 10
-  AttackDelay: 1
---- !u!1 &2347625204696749070
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3572085810362528382}
-  - component: {fileID: 816329611016875292}
-  - component: {fileID: 1709636391889284299}
-  m_Layer: 11
-  m_Name: Attack Ranged Radius
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3572085810362528382
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347625204696749070}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6263977698711176558}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &816329611016875292
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347625204696749070}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 7.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1709636391889284299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347625204696749070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd0d55bd39e9f48458bcf0002a14e904, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackRadius
-  Collider: {fileID: 816329611016875292}
   Damage: 50
-  AttackDelay: 5
+  AttackDelay: 2.5
+  Agent: {fileID: 3388754700473093437}
+  FireballPrefab: {fileID: 5487443417038037780, guid: 45eaa97ea035c486484a2581dd7c84bf, type: 3}
+  SpawnHeightOffset: 1.1
+  Mask:
+    serializedVersion: 2
+    m_Bits: 129
+  PredictiveChance: 0.2
+  PredictionTime: 1
+  AssumedTargetSpeed: 4
+  TargetHeightOffset: 1
+  SphereCastRadius: 0.45
 --- !u!1001 &3001664124013128035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -304,15 +246,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -69.94
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.137
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -127.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -373,9 +315,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6196051600979635416}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3572085810362528382}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       insertIndex: -1
@@ -394,7 +333,7 @@ PrefabInstance:
       addedObject: {fileID: 8502740078969206352}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3817555331990524516}
+      addedObject: {fileID: 4931607182918921866}
   m_SourcePrefab: {fileID: 100100000, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
 --- !u!4 &6263977698711176558 stripped
 Transform:
@@ -447,18 +386,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 0.5
-      value: 1
+      value: 0.25
       inSlope: 0
       outSlope: 0
-      tangentMode: 34
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
@@ -475,7 +414,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   minDuration: 0.1
-  maxDuration: 5
+  maxDuration: 2.5
 --- !u!114 &6402712636644549819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,6 +430,12 @@ MonoBehaviour:
   Player: {fileID: 0}
   Animator: {fileID: 8701684796269958386}
   UpdateRate: 0.1
+  Waypoints:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  WaypointIndex: 0
 --- !u!114 &3237888490003597961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb172488e39e486c99c4169539ef4b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  AttackRadius: {fileID: 2325437154138262738}
+  AttackRadius: {fileID: 9045077299759496329}
   Animator: {fileID: 8701684796269958386}
   Movement: {fileID: 6402712636644549819}
   Agent: {fileID: 3388754700473093437}
@@ -532,11 +477,11 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &3817555331990524516
+--- !u!136 &4931607182918921866
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -551,11 +496,11 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.4
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}

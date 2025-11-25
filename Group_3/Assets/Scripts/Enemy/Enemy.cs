@@ -4,6 +4,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum EnemyTrigger
+{
+    Attack,
+    Death,
+};
+
 public class Enemy : PoolableObject, IDamageable
 {
     [Header("Components")]
@@ -23,8 +29,11 @@ public class Enemy : PoolableObject, IDamageable
     public int Health = 100;
     [Tooltip("Coroutine handling the look process.")]
     private Coroutine LookCoroutine;
-    [Tooltip("The attack trigger name in the Animator.")]
-    private const string ATTACK_TRIGGER = "Attack";
+
+    // Callback for when this enemy dies
+    public delegate void DeathEvent(Enemy enemy);
+    public DeathEvent OnDeath;
+    private readonly static WaitForSeconds _waitForSeconds3 = new(3f);
 
     private void Awake()
     {
@@ -33,63 +42,45 @@ public class Enemy : PoolableObject, IDamageable
 
     private void OnAttack(IDamageable Target)
     {
-        Animator.SetTrigger(ATTACK_TRIGGER);
+        Animator.SetTrigger(EnemyTrigger.Attack.ToString());
 
         if (LookCoroutine != null)
         {
             StopCoroutine(LookCoroutine);
         }
 
-        LookCoroutine = StartCoroutine(LookAt(Target.GetTransform()));
+        Vector3 targetPosition = Target.GetTransform().position;
+        LookCoroutine = StartCoroutine(LookAt(transform, targetPosition, 0.2f));
     }
 
-    private IEnumerator LookAt(Transform Target)
+    private IEnumerator LookAt(Transform objectToMove, Vector3 worldPosition, float duration)
     {
-        Quaternion lookRotation = Quaternion.LookRotation(Target.position - transform.position);
-        float time = 0;
+        Quaternion currentRot = objectToMove.rotation;
+        Quaternion newRot = Quaternion.LookRotation(worldPosition -
+            objectToMove.position, objectToMove.TransformDirection(Vector3.up));
 
-        while (time < 1)
+        float counter = 0;
+        while (counter < duration)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, time);
-
-            time += Time.deltaTime * 2;
+            counter += Time.deltaTime;
+            objectToMove.rotation =
+                Quaternion.Lerp(currentRot, newRot, counter / duration);
             yield return null;
         }
-
-        transform.rotation = lookRotation;
-    }
-
-    public virtual void OnEnable()
-    {
-        SetupAgentFromConfiguration();
     }
 
     public override void OnDisable()
     {
         base.OnDisable();
 
-        Agent.enabled = false;
-    }
+        // Reset all states
+        Agent.enabled = false; // Disable agent to re-enable on respawn
+        OnDeath = null;
+        AttackRadius.Reset();
 
-    public virtual void SetupAgentFromConfiguration()
-    {
-        Agent.acceleration = EnemyScriptableObject.Acceleration;
-        Agent.angularSpeed = EnemyScriptableObject.AngularSpeed;
-        Agent.areaMask = EnemyScriptableObject.AreaMask;
-        Agent.avoidancePriority = EnemyScriptableObject.AvoidancePriority;
-        Agent.baseOffset = EnemyScriptableObject.BaseOffset;
-        Agent.height = EnemyScriptableObject.Height;
-        Agent.obstacleAvoidanceType = EnemyScriptableObject.ObstacleAvoidanceType;
-        Agent.radius = EnemyScriptableObject.Radius;
-        Agent.speed = EnemyScriptableObject.Speed;
-        Agent.stoppingDistance = EnemyScriptableObject.StoppingDistance;
-
-        Movement.UpdateRate = EnemyScriptableObject.AIUpdateInterval;
-
-        Health = EnemyScriptableObject.Health;
-        (AttackRadius.Collider == null ? AttackRadius.GetComponent<SphereCollider>() : AttackRadius.Collider).radius = EnemyScriptableObject.AttackRadius;
-        AttackRadius.AttackDelay = EnemyScriptableObject.AttackDelay;
-        AttackRadius.Damage = EnemyScriptableObject.Damage;
+        TryGetComponent(out Collider collider);
+        if (collider != null && !collider.enabled)
+            collider.enabled = true;
     }
 
     public void TakeDamage(int Damage)
@@ -97,7 +88,7 @@ public class Enemy : PoolableObject, IDamageable
         Health -= Damage;
         if (Health <= 0)
         {
-            KillSelf();
+            StartCoroutine(KillSelf());
         }
     }
 
@@ -106,9 +97,27 @@ public class Enemy : PoolableObject, IDamageable
         return transform;
     }
 
-    private void KillSelf()
+    private IEnumerator KillSelf()
     {
-        // TODO: Play death animation
+        // Disable movement and look behavior
+        if (LookCoroutine != null)
+        {
+            StopCoroutine(LookCoroutine);
+        }
+
+        TryGetComponent(out Collider collider);
+        if (collider != null && collider.isTrigger)
+            collider.enabled = false;
+
+        // Trigger the death animation
+        Animator.SetTrigger(EnemyTrigger.Death.ToString());
+        // Notify spawner via callback
+        OnDeath?.Invoke(this);
+
+        // Wait for death animation to play (3 seconds)
+        yield return _waitForSeconds3;
+
+        // Despawn the enemy
         gameObject.SetActive(false);
     }
 }

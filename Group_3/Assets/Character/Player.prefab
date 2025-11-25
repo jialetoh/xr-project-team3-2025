@@ -128,9 +128,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1928389238801210308
 CapsuleCollider:
@@ -298,8 +298,8 @@ MonoBehaviour:
   moveActionReference: {fileID: 8130185064591157487, guid: 59c551f8259784a429773ca4a275eb03, type: 3}
   sprintActionReference: {fileID: -6424176782126915535, guid: 59c551f8259784a429773ca4a275eb03, type: 3}
   jumpActionReference: {fileID: 1481124759659193975, guid: 59c551f8259784a429773ca4a275eb03, type: 3}
-  walkingSpeed: 2.25
-  sprintSpeed: 4
+  walkingSpeed: 4
+  sprintSpeed: 6
   jumpVelocity: 6.5
 --- !u!114 &354279388133574573
 MonoBehaviour:
