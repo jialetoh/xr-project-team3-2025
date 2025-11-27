@@ -1,24 +1,48 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RightControllerInteractor : MonoBehaviour
 {
-    // Weapon Manager
     public List<Weapon> weaponPrefabs;
-    public int currentWeaponIndex = 0;
-    public float switchThreshold = 0.7f;
-    public float switchCooldown = 0.3f;
-    private Weapon _currentWeapon;
+    [HideInInspector] public Weapon CurrentWeapon;
+    private int currentWeaponIndex = 0;
+
+    [SerializeField] private float switchCooldown = 0.3f;
+    [SerializeField] private float thumbstickThreshold = 0.7f;
     private float _switchTimer = 0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    public AmmoSpawner ammoSpawner;
+    public event Action<Weapon> OnWeaponChanged;
+
+    private void Awake()
     {
         EquipWeapon(currentWeaponIndex);
     }
 
-    // Update is called once per frame
+    private void EquipWeapon(int index)
+    {
+        // Unequip first
+        if (CurrentWeapon != null)
+        {
+            // Reset input state on the old weapon (polymorphic - each weapon cleans up its own state)
+            CurrentWeapon.ResetInputState();
+            CurrentWeapon.OnUnequip();
+            ammoSpawner.OnWeaponUnequipped();
+            Destroy(CurrentWeapon.gameObject);
+        }
+
+        // Equip
+        Weapon prefab = weaponPrefabs[index];
+        CurrentWeapon = Instantiate(prefab, transform);
+        CurrentWeapon.OnEquip();
+
+        ammoSpawner.OnWeaponEquipped(CurrentWeapon);
+
+        // Notify subscribers (LeftControllerInteractor)
+        OnWeaponChanged?.Invoke(CurrentWeapon);
+    }
+
     private void Update()
     {
         _switchTimer -= Time.deltaTime;
@@ -27,71 +51,36 @@ public class RightControllerInteractor : MonoBehaviour
         HandleWeaponInputs();
     }
 
-    void HandleWeaponInputs()
-    {
-        bool triggerDown = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
-        bool triggerUp = OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
-
-        if (triggerDown) _currentWeapon.OnPrimaryFireDown();
-        if (triggerUp) _currentWeapon.OnPrimaryFireUp();
-
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger, OVRInput.Controller.RTouch))
-        {
-            _currentWeapon.OnAltAction();
-        }
-    }
-
-    void EquipWeapon(int index)
-    {
-        if (_currentWeapon != null)
-        {
-            _currentWeapon.OnUnequip();
-            Destroy(_currentWeapon.gameObject);
-            Debug.Log("Destroying current weapon!");
-        }
-        Debug.Log("Equipping weapon");
-        Weapon prefab = weaponPrefabs[index];
-        _currentWeapon = Instantiate(prefab, transform);
-        _currentWeapon.OnEquip();
-    }
-
-    void HandleWeaponSwitch()
+    private void HandleWeaponSwitch()
     {
         if (_switchTimer <= 0f)
         {
+            // Weapon switch is controlled by right thumbstick
             Vector2 stick = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick, OVRInput.Controller.RTouch);
-            Debug.Log("stick = " + stick);
-            if (stick.y >= switchThreshold)
+            if (stick.y >= thumbstickThreshold)
             {
-                Debug.Log("Cycling Weapon +1");
+                // Next weapon
                 CycleWeapon(+1);
             }
-            else if (stick.y <= -switchThreshold)
+            else if (stick.y <= -thumbstickThreshold)
             {
-                Debug.Log("Cycling Weapon -1");
+                // Previous weapon
                 CycleWeapon(-1);
             }
         }
     }
 
-    void CycleWeapon(int delta)
+    private void CycleWeapon(int delta)
     {
-        Debug.Log("Cycling weapon");
+        Debug.Log("Cycling weapon: " + delta);
         _switchTimer = switchCooldown;
         int count = weaponPrefabs.Count;
         currentWeaponIndex = (currentWeaponIndex + delta + count) % count;
         EquipWeapon(currentWeaponIndex);
     }
 
-    public void PulseHaptics(float amplitude, float duration)
+    private void HandleWeaponInputs()
     {
-        StartCoroutine(HapticsCoroutine(amplitude, duration));
-    }
-
-    private IEnumerator HapticsCoroutine(float amplitude, float duration)
-    {
-        OVRInput.SetControllerVibration(1f, amplitude, OVRInput.Controller.RTouch);
-        yield return new WaitForSeconds(duration);
-        OVRInput.SetControllerVibration(0f, 0f, OVRInput.Controller.RTouch);
+        CurrentWeapon.HandleRightControllerInputs();
     }
 }
