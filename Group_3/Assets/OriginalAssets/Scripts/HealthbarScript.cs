@@ -13,6 +13,22 @@ public class HealthbarScript : MonoBehaviour
     private float _currentHealth;
     private float _timeSinceLastDamage;
     private bool _isRegenerating;
+    private bool controlsEnabled = true;
+
+    private void OnEnable()
+    {
+        PauseMenuScript.OnPauseMenuStateChanged += HandlePauseMenuState;
+    }
+
+    private void OnDisable()
+    {
+        PauseMenuScript.OnPauseMenuStateChanged -= HandlePauseMenuState;
+    }
+
+    private void HandlePauseMenuState(bool paused)
+    {
+        controlsEnabled = !paused;
+    }
 
     private void Start()
     {
@@ -24,8 +40,12 @@ public class HealthbarScript : MonoBehaviour
 
     private void Update()
     {
+        // Skip input processing while paused or during the short post-resume suppression window
+        if (PauseMenuScript.GameIsPaused || PauseMenuScript.IsInputSuppressed())
+            return; // skip input
+
         // Check for Y button press on left controller (Primary button)
-        if (OVRInput.GetDown(OVRInput.Button.Four))
+        if (controlsEnabled && OVRInput.GetDown(OVRInput.Button.Four))
         {
             TakeDamage(damageAmount);
         }

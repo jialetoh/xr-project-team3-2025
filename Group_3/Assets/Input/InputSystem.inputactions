@@ -392,6 +392,28 @@
                 },
                 {
                     "name": "",
+                    "id": "d1a6a9b2-3f2b-4c1e-9f12-1a2b3c4d5e6f",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f6e5d4c3-b2a1-0987-6f5e-4d3c2b1a0f9e",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c14e29a8-327e-4f47-9cef-d5c853b3ce33",
                     "path": "<Keyboard>/p",
                     "interactions": "",
