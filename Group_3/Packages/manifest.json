@@ -39,6 +39,7 @@
     "com.unity.transport": "2.5.3",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.7",
+    "com.unity.xr.interaction.toolkit": "3.2.2",
     "com.unity.xr.management": "4.5.2",
     "com.unity.xr.openxr": "1.15.1",
     "com.veriorpies.parrelsync": "https://github.com/VeriorPies/ParrelSync.git?path=/ParrelSync",
