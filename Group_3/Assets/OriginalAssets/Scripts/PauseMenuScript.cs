@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class PauseMenuScript : MonoBehaviour
@@ -65,19 +66,22 @@ public class PauseMenuScript : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
 
-        // Suppress input briefly to prevent stacking
         _inputSuppressedUntilRealtime = Time.realtimeSinceStartup + inputSuppressionDuration;
 
         OnPauseMenuStateChanged?.Invoke(false);
     }
 
+    public void Resume(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            Resume();
+    }
+
     private void EnableRayInteractors(bool menuIsOpen)
     {
-        // Left interactor should remain always disabled
         if (leftRayInteractor != null)
             leftRayInteractor.SetActive(false);
 
-        // Right interactor is enabled only when the menu is open
         if (rightRayInteractor != null)
             rightRayInteractor.SetActive(menuIsOpen);
     }
@@ -90,6 +94,16 @@ public class PauseMenuScript : MonoBehaviour
     public void Exit()
     {
         Time.timeScale = 1f;
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
+    }
+
+    public void Exit(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            Exit();
     }
 }
