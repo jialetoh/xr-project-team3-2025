@@ -28,7 +28,6 @@ public class PauseMenuScript : MonoBehaviour
             pauseMenuCanvas.SetActive(false);
 
         GameIsPaused = false;
-        // Ensure left interactor is always disabled; initialize right interactor off
         if (leftRayInteractor != null)
             leftRayInteractor.SetActive(false);
         if (rightRayInteractor != null)
@@ -38,6 +37,10 @@ public class PauseMenuScript : MonoBehaviour
 
     private void Update()
     {
+
+        if (GameOverManager.IsGameOver)
+            return;
+
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             if (GameIsPaused) Resume();

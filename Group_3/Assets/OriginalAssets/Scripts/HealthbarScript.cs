@@ -74,6 +74,18 @@ public class HealthbarScript : MonoBehaviour
         _timeSinceLastDamage = 0f; // Reset timer when damage is taken
         _isRegenerating = false;
         UpdateHealthbar();
+
+        // Trigger game over when health reaches 0
+        if (_currentHealth <= 0f && GameOverManager.Instance != null)
+        {
+            GameOverManager.Instance.TriggerGameOver();
+            HideHealthbar();
+        }
+    }
+
+    public void HideHealthbar()
+    {
+        gameObject.SetActive(false);
     }
 
     private void RegenerateHealth()
