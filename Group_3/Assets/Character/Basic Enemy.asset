@@ -19,6 +19,12 @@ MonoBehaviour:
   Damage: 5
   AttackRadius: 1.5
   HasRangedAttack: 0
+  DefaultState: 1
+  IdleLocationRadius: 4
+  IdleMovespeedMultiplier: 0.2
+  Waypoints: 4
+  LineOfSightRange: 10
+  FieldOfView: 90
   AIUpdateInterval: 0.1
   Acceleration: 8
   AngularSpeed: 120
@@ -27,6 +33,6 @@ MonoBehaviour:
   BaseOffset: 0
   Height: 2
   ObstacleAvoidanceType: 3
-  Radius: 0.5
+  Radius: 0.3
   Speed: 3.5
   StoppingDistance: 0.5

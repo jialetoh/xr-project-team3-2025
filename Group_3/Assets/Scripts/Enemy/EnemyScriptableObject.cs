@@ -28,6 +28,22 @@ public class EnemyScriptableObject : ScriptableObject
     [Tooltip("Does the enemy have a ranged attack?")]
     public bool HasRangedAttack = false;
 
+    [Header("Enemy Behavior Settings")]
+    [Tooltip("The default state of the enemy.")]
+    public EnemyState DefaultState;
+    [Tooltip("The radius within which the enemy can idle.")]
+    public float IdleLocationRadius = 4f;
+    [Tooltip("The movement speed multiplier when the enemy is idle.")]
+    public float IdleMovespeedMultiplier = 0.5f;
+    [Range(2, 10)]
+    [Tooltip("The number of waypoints for patrolling.")]
+    public int Waypoints = 4;
+    [Tooltip("The range within which the enemy can see the player.")]
+    public float LineOfSightRange = 6f;
+    [Tooltip("The field of view angle of the enemy.")]
+    public float FieldOfView = 90f;
+
+
     [Header("NavMesh Agent Settings")]
     [Tooltip("The interval at which the AI updates its pathfinding")]
     public float AIUpdateInterval = 0.1f;
@@ -71,13 +87,13 @@ public class EnemyScriptableObject : ScriptableObject
         enemy.Agent.stoppingDistance = StoppingDistance;
 
         enemy.Movement.UpdateRate = AIUpdateInterval;
-        // enemy.Movement.DefaultState = DefaultState;
-        // enemy.Movement.IdleMovespeedMultiplier = IdleMovespeedMultiplier;
-        // enemy.Movement.IdleLocationRadius = IdleLocationRadius;
-        // enemy.Movement.Waypoints = new Vector3[Waypoints];
-        // enemy.Movement.LineOfSightChecker.FieldOfView = FieldOfView;
-        // enemy.Movement.LineOfSightChecker.Collider.radius = LineOfSightRange;
-        // enemy.Movement.LineOfSightChecker.LineOfSightLayers = AttackConfiguration.LineOfSightLayers;
+        enemy.Movement.DefaultState = DefaultState;
+        enemy.Movement.IdleMovespeedMultiplier = IdleMovespeedMultiplier;
+        enemy.Movement.IdleLocationRadius = IdleLocationRadius;
+        enemy.Movement.Waypoints = new Vector3[Waypoints];
+        enemy.Movement.LineOfSightChecker.FieldOfView = FieldOfView;
+        enemy.Movement.LineOfSightChecker.Collider.radius = LineOfSightRange;
+        enemy.Movement.LineOfSightChecker.LineOfSightLayers = AttackConfiguration.LineOfSightLayers;
 
         enemy.Health = Health;
 

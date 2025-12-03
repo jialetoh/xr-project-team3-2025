@@ -2,7 +2,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -127,8 +126,7 @@ public class EnemySpawner : MonoBehaviour
             enemy.Movement.Player = Player;
             enemy.Movement.Triangulation = Triangulation;
             enemy.Agent.enabled = true;
-            // enemy.Movement.Spawn();
-            enemy.Movement.StartChasing();
+            enemy.Movement.Spawn();
             enemy.OnDeath += OnEnemyDied;
 
             EnemiesAlive++;

@@ -4,18 +4,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum MovementState
-{
-    Walking,
-    Jumping,
-    Landing,
-};
-
 [RequireComponent(typeof(NavMeshAgent), typeof(AgentLinkMover))]
 public class EnemyMovement : MonoBehaviour
 {
+    [Header("References")]
     [Tooltip("The character to follow.")]
     public Transform Player;
+    [Tooltip("Line of sight checker for the enemy.")]
+    public EnemyLineOfSightChecker LineOfSightChecker;
 
     [Tooltip("Animator component for handling animations.")]
     [SerializeField]
@@ -33,14 +29,55 @@ public class EnemyMovement : MonoBehaviour
     [Tooltip("Triangulation data of the NavMesh for random waypoint generation.")]
     public NavMeshTriangulation Triangulation = new();
 
+    [Header("Enemy State Settings")]
+    [Tooltip("The default state of the enemy.")]
+    public EnemyState DefaultState;
+    [Tooltip("Current state of the enemy.")]
+    private EnemyState _state;
+    [Tooltip("Gets or sets the current state of the enemy.")]
+    public EnemyState State
+    {
+        get
+        {
+            return _state;
+        }
+        set
+        {
+            OnStateChange?.Invoke(_state, value);
+            _state = value;
+        }
+    }
+
+    [Tooltip("Event triggered when the enemy's state changes.")]
+    public delegate void StateChangeEvent(EnemyState oldState, EnemyState newState);
+    [Tooltip("Event invoked on state change.")]
+    public StateChangeEvent OnStateChange;
+
+    [Header("Idle and Patrol Settings")]
+    [Tooltip("Radius for idle movement.")]
+    public float IdleLocationRadius = 4f;
+    [Tooltip("Movement speed multiplier when idle.")]
+    public float IdleMovespeedMultiplier = 0.5f;
     [Tooltip("Waypoints for Patrolling (if needed)")]
     public Vector3[] Waypoints = new Vector3[4];
     [Tooltip("Current waypoint index")]
     [SerializeField]
     private int WaypointIndex = 0;
 
+    [Header("State Transition Settings")]
+    [Tooltip("Time interval for checking state transitions (in seconds).")]
+    public float StateTransitionInterval = 5f;
+    [Tooltip("Chance to switch from Patrol to Idle (0-1).")]
+    [Range(0f, 1f)]
+    public float PatrolToIdleChance = 0.25f;
+    [Tooltip("Chance to switch from Idle to Patrol (0-1).")]
+    [Range(0f, 1f)]
+    public float IdleToPatrolChance = 0.45f;
+
     [Tooltip("Coroutine for following the target.")]
     private Coroutine FollowCoroutine;
+    [Tooltip("Coroutine for handling state transitions.")]
+    private Coroutine StateTransitionCoroutine;
 
     private void Awake()
     {
@@ -49,6 +86,23 @@ public class EnemyMovement : MonoBehaviour
 
         LinkMover.OnLinkEnd += HandleLinkEnd;
         LinkMover.OnLinkStart += HandleLinkStart;
+
+        LineOfSightChecker.OnGainSight += HandleGainSight;
+        LineOfSightChecker.OnLoseSight += HandleLoseSight;
+
+        OnStateChange += HandleStateChange;
+    }
+
+    private void OnDisable()
+    {
+        _state = DefaultState; // use _state to avoid triggering OnStateChange when recycling object in the pool
+
+        // Stop state transition coroutine
+        if (StateTransitionCoroutine != null)
+        {
+            StopCoroutine(StateTransitionCoroutine);
+            StateTransitionCoroutine = null;
+        }
     }
 
     public void Spawn()
@@ -67,6 +121,8 @@ public class EnemyMovement : MonoBehaviour
                 }
             }
         }
+
+        OnStateChange?.Invoke(EnemyState.Spawn, DefaultState);
     }
 
     public void StartChasing()
@@ -83,7 +139,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (MoveMethod == OffMeshLinkMoveMethod.NormalSpeed)
         {
-            Animator.SetBool(MovementState.Walking.ToString(), true);
+            Animator.SetBool(GetStateMoveAnimation(), true);
         }
         else if (MoveMethod != OffMeshLinkMoveMethod.Teleport)
         {
@@ -103,7 +159,110 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!Agent.isOnOffMeshLink)
         {
-            Animator.SetBool(MovementState.Walking.ToString(), Agent.velocity.magnitude > 0.01f);
+            Animator.SetBool(GetStateMoveAnimation(), Agent.velocity.magnitude > 0.01f);
+        }
+    }
+
+    private string GetStateMoveAnimation()
+    {
+        // Only set Running animation when in Chase state
+        // For the rest, use Walking animation
+        return State == EnemyState.Chase ? MovementState.Running.ToString() : MovementState.Walking.ToString();
+    }
+
+    private void HandleStateChange(EnemyState oldState, EnemyState newState)
+    {
+        if (oldState == newState)
+        {
+            return;
+        }
+
+        // Stop any existing movement coroutine
+        if (FollowCoroutine != null)
+        {
+            StopCoroutine(FollowCoroutine);
+        }
+        if (oldState == EnemyState.Idle || oldState == EnemyState.Patrol)
+        {
+            Agent.speed /= IdleMovespeedMultiplier;
+        }
+
+        // Reset animator - turn off previous state animations
+        if (oldState == EnemyState.Chase)
+        {
+            // Turning off running animation when leaving chase state
+            Animator.SetBool(MovementState.Running.ToString(), false);
+        }
+        else if (oldState == EnemyState.Idle || oldState == EnemyState.Patrol)
+        {
+            // Turning off walking animation when leaving idle/patrol state
+            Animator.SetBool(MovementState.Walking.ToString(), false);
+        }
+
+        // Start the appropriate movement coroutine based on the new state
+        switch (newState)
+        {
+            case EnemyState.Idle:
+                Agent.speed *= IdleMovespeedMultiplier;
+                FollowCoroutine = StartCoroutine(DoIdleMotion());
+                StartStateTransitionCoroutine();
+                break;
+            case EnemyState.Patrol:
+                Agent.speed *= IdleMovespeedMultiplier;
+                FollowCoroutine = StartCoroutine(DoPatrolMotion());
+                StartStateTransitionCoroutine();
+                break;
+            case EnemyState.Chase:
+                FollowCoroutine = StartCoroutine(FollowTarget());
+                StopStateTransitionCoroutine();
+                break;
+        }
+    }
+
+    private IEnumerator DoIdleMotion()
+    {
+        WaitForSeconds Wait = new(UpdateRate);
+
+        while (true)
+        {
+            if (!Agent.enabled || !Agent.isOnNavMesh)
+            {
+                yield return Wait;
+            }
+            else if (Agent.remainingDistance <= Agent.stoppingDistance)
+            {
+                Vector2 point = Random.insideUnitCircle * IdleLocationRadius;
+                if (NavMesh.SamplePosition(Agent.transform.position + new Vector3(point.x, 0, point.y), out NavMeshHit hit, 2f, Agent.areaMask))
+                {
+                    Agent.SetDestination(hit.position);
+                }
+            }
+
+            yield return Wait;
+        }
+    }
+
+    private IEnumerator DoPatrolMotion()
+    {
+        WaitForSeconds Wait = new(UpdateRate);
+
+        yield return new WaitUntil(() => Agent.enabled && Agent.isOnNavMesh);
+        Agent.SetDestination(Waypoints[WaypointIndex]);
+
+        while (true)
+        {
+            if (Agent.isOnNavMesh && Agent.enabled && Agent.remainingDistance <= Agent.stoppingDistance)
+            {
+                WaypointIndex++;
+                if (WaypointIndex >= Waypoints.Length)
+                {
+                    WaypointIndex = 0;
+                }
+
+                Agent.SetDestination(Waypoints[WaypointIndex]);
+            }
+
+            yield return Wait;
         }
     }
 
@@ -134,6 +293,61 @@ public class EnemyMovement : MonoBehaviour
             else
             {
                 Gizmos.DrawLine(Waypoints[i], Waypoints[0]);
+            }
+        }
+    }
+
+    private void HandleGainSight(Player player)
+    {
+        State = EnemyState.Chase;
+    }
+
+    private void HandleLoseSight(Player player)
+    {
+        State = DefaultState;
+    }
+
+    private void StartStateTransitionCoroutine()
+    {
+        // Stop existing coroutine if running
+        StopStateTransitionCoroutine();
+
+        // Start new state transition coroutine
+        StateTransitionCoroutine = StartCoroutine(HandleStateTransitions());
+    }
+
+    private void StopStateTransitionCoroutine()
+    {
+        if (StateTransitionCoroutine != null)
+        {
+            StopCoroutine(StateTransitionCoroutine);
+            StateTransitionCoroutine = null;
+        }
+    }
+
+    private IEnumerator HandleStateTransitions()
+    {
+        WaitForSeconds wait = new(StateTransitionInterval);
+
+        while (true)
+        {
+            yield return wait;
+
+            // Only transition between Idle and Patrol states (not during Chase)
+            if (State == EnemyState.Idle || State == EnemyState.Patrol)
+            {
+                float randomValue = Random.Range(0f, 1f);
+
+                if (State == EnemyState.Idle && randomValue < IdleToPatrolChance)
+                {
+                    // Switch from Idle to Patrol
+                    State = EnemyState.Patrol;
+                }
+                else if (State == EnemyState.Patrol && randomValue < PatrolToIdleChance)
+                {
+                    // Switch from Patrol to Idle
+                    State = EnemyState.Idle;
+                }
             }
         }
     }
