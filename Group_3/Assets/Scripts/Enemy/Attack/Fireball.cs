@@ -1,11 +1,12 @@
 // Adapted from: https://github.com/llamacademy/ai-series-part-7/blob/main/Assets/Scripts/Bullet.cs
 
-using System;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Fireball : PoolableObject
 {
+    [Header("Fireball Settings")]
     [Tooltip("Time in seconds before the fireball auto-destroys itself.")]
     public float AutoDestroyTime = 5f;
     [Tooltip("Speed at which the fireball moves.")]
@@ -15,7 +16,14 @@ public class Fireball : PoolableObject
     [Tooltip("Rigidbody component of the fireball.")]
     public Rigidbody Rigidbody;
 
+    [Header("Visual Effects")]
+    [Tooltip("Visual Effects Graph asset for explosion effect.")]
+    public VisualEffectAsset ExplosionVFXAsset;
+    [Tooltip("Trail renderers for the fireball.")]
     private TrailRenderer[] TrailRenderers;
+    [Tooltip("Duration of the explosion animation.")]
+    [SerializeField]
+    private float ExplosionAnimationDuration = 1.5f;
 
     private const string DISABLE_METHOD_NAME = "Disable";
 
@@ -38,7 +46,27 @@ public class Fireball : PoolableObject
             damageable.TakeDamage(Damage);
         }
 
+        // Play explosion effect at collision point
+        PlayExplosionEffect();
+
         Disable();
+    }
+    private void PlayExplosionEffect()
+    {
+        if (ExplosionVFXAsset != null)
+        {
+            // Create a temporary GameObject for the explosion effect
+            GameObject vfxObject = new("FireballExplosion");
+            vfxObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+            // Add and configure the VisualEffect component
+            VisualEffect vfx = vfxObject.AddComponent<VisualEffect>();
+            vfx.visualEffectAsset = ExplosionVFXAsset;
+
+            // Play the effect and destroy after duration
+            vfx.Play();
+            Destroy(vfxObject, ExplosionAnimationDuration);
+        }
     }
 
     private void Disable()

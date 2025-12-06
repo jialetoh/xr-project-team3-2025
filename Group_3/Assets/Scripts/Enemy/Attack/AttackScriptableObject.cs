@@ -24,6 +24,28 @@ public class AttackScriptableObject : ScriptableObject
     [Tooltip("The layer mask used for line of sight checks.")]
     public LayerMask LineOfSightLayers;
 
+    /// <summary>
+    /// Scales up the attack configuration based on the provided scaling configuration and level.
+    /// </summary>
+    /// <param name="Scaling">Scaling configuration</param>
+    /// <param name="Level">Level to scale up for</param>
+    /// <returns>Scaled up attack configuration</returns>
+    public AttackScriptableObject ScaleUpForLevel(ScalingScriptableObject Scaling, int Level)
+    {
+        AttackScriptableObject scaledUpConfiguration = CreateInstance<AttackScriptableObject>();
+
+        scaledUpConfiguration.IsRanged = IsRanged;
+        scaledUpConfiguration.Damage = Mathf.FloorToInt(Damage * Scaling.DamageCurve.Evaluate(Level));
+        scaledUpConfiguration.AttackRadius = AttackRadius;
+        scaledUpConfiguration.AttackDelay = AttackDelay;
+
+        scaledUpConfiguration.FireballPrefab = FireballPrefab;
+        scaledUpConfiguration.SpawnHeightOffset = SpawnHeightOffset;
+        scaledUpConfiguration.LineOfSightLayers = LineOfSightLayers;
+
+        return scaledUpConfiguration;
+    }
+
     public void SetupEnemy(Enemy enemy)
     {
         (enemy.AttackRadius.Collider == null ? enemy.AttackRadius.GetComponent<SphereCollider>() : enemy.AttackRadius.Collider).radius = AttackRadius;

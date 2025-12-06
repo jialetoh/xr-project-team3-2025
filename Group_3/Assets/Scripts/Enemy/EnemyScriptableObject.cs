@@ -73,6 +73,47 @@ public class EnemyScriptableObject : ScriptableObject
     [Tooltip("The stopping distance of the NavMesh agent")]
     public float StoppingDistance = 0.5f;
 
+    /// <summary>
+    /// Scales up the enemy stats based on the provided scaling configuration and level.
+    /// </summary>
+    /// <param name="Scaling">Scaling configuration</param>
+    /// <param name="Level">Level to scale up for</param>
+    /// <returns>Scaled up enemy</returns>
+    public EnemyScriptableObject ScaleUpForLevel(ScalingScriptableObject Scaling, int Level)
+    {
+        EnemyScriptableObject scaledUpEnemy = CreateInstance<EnemyScriptableObject>();
+
+        scaledUpEnemy.name = name;
+        scaledUpEnemy.Prefab = Prefab;
+
+        scaledUpEnemy.AttackConfiguration = AttackConfiguration.ScaleUpForLevel(Scaling, Level);
+
+        scaledUpEnemy.Health = Mathf.FloorToInt(Health * Scaling.HealthCurve.Evaluate(Level));
+
+        scaledUpEnemy.DefaultState = DefaultState;
+        scaledUpEnemy.IdleLocationRadius = IdleLocationRadius;
+        scaledUpEnemy.IdleMovespeedMultiplier = IdleMovespeedMultiplier;
+        scaledUpEnemy.Waypoints = Waypoints;
+        scaledUpEnemy.LineOfSightRange = LineOfSightRange;
+        scaledUpEnemy.FieldOfView = FieldOfView;
+
+        scaledUpEnemy.AIUpdateInterval = AIUpdateInterval;
+        scaledUpEnemy.Acceleration = Acceleration;
+        scaledUpEnemy.AngularSpeed = AngularSpeed;
+
+        scaledUpEnemy.AreaMask = AreaMask;
+        scaledUpEnemy.AvoidancePriority = AvoidancePriority;
+
+        scaledUpEnemy.BaseOffset = BaseOffset;
+        scaledUpEnemy.Height = Height;
+        scaledUpEnemy.ObstacleAvoidanceType = ObstacleAvoidanceType;
+        scaledUpEnemy.Radius = Radius;
+        scaledUpEnemy.Speed = Speed * Scaling.SpeedCurve.Evaluate(Level);
+        scaledUpEnemy.StoppingDistance = StoppingDistance;
+
+        return scaledUpEnemy;
+    }
+
     public void SetUpEnemy(Enemy enemy)
     {
         enemy.Agent.acceleration = Acceleration;

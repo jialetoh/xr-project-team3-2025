@@ -139,7 +139,7 @@ MonoBehaviour:
   FieldOfView: 90
   LineOfSightLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 137
 --- !u!1001 &4266044171974021253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -250,8 +250,8 @@ MonoBehaviour:
   strideThresholdDistance: 0.75
   strideThresholdDegrees: 45
   strideTime: 0.25
-  footGroundedHeight: 0.05
-  maxHipFootDistance: 0.85
+  footGroundedHeight: 0.01
+  maxHipFootDistance: 1
   maxHipOffset: 0.45
   hipSmoothTime: 0.35
   overlapBlendTime: 0.05

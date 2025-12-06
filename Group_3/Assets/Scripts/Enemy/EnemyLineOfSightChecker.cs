@@ -55,6 +55,16 @@ public class EnemyLineOfSightChecker : MonoBehaviour
         }
     }
 
+    private IEnumerator CheckForLineOfSight(Player player)
+    {
+        WaitForSeconds Wait = new(0.1f);
+
+        while (!CheckLineOfSight(player))
+        {
+            yield return Wait;
+        }
+    }
+
     private bool CheckLineOfSight(Player player)
     {
         Vector3 Direction = (player.transform.position - transform.position).normalized;
@@ -73,15 +83,5 @@ public class EnemyLineOfSightChecker : MonoBehaviour
         }
 
         return false;
-    }
-
-    private IEnumerator CheckForLineOfSight(Player player)
-    {
-        WaitForSeconds Wait = new(0.1f);
-
-        while (!CheckLineOfSight(player))
-        {
-            yield return Wait;
-        }
     }
 }

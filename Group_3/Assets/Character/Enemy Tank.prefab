@@ -74,7 +74,7 @@ MonoBehaviour:
   SpawnHeightOffset: 1.1
   Mask:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 137
   PredictiveChance: 0.2
   PredictionTime: 1
   AssumedTargetSpeed: 4
@@ -150,7 +150,7 @@ MonoBehaviour:
   FieldOfView: 90
   LineOfSightLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 137
 --- !u!1001 &3001664124013128035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1476,6 +1476,10 @@ PrefabInstance:
       value: -0.0000009895779
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: a38189cafb11d495b94ccfbe2e4bbfa0, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c6e0c3795c9d944458ec42779b2fbe12, type: 2}
@@ -1864,8 +1868,8 @@ MonoBehaviour:
   strideThresholdDistance: 0.75
   strideThresholdDegrees: 45
   strideTime: 0.25
-  footGroundedHeight: 0.05
-  maxHipFootDistance: 0.85
+  footGroundedHeight: 0.01
+  maxHipFootDistance: 1
   maxHipOffset: 0.45
   hipSmoothTime: 0.35
   overlapBlendTime: 0.05
@@ -2180,7 +2184,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &4931607182918921866
 CapsuleCollider:

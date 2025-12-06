@@ -61,14 +61,14 @@ public class EnemyBurstSpawner : MonoBehaviour
             {
                 case EnemySpawner.SpawnMethod.RoundRobin:
                     EnemySpawner.DoSpawnEnemy(
-                        EnemySpawner.Enemies.FindIndex((enemy) => enemy.Equals(Enemies[i % Enemies.Count])),
+                        EnemySpawner.WeightedEnemies.FindIndex((enemy) => enemy.Enemy.Equals(Enemies[i % Enemies.Count])),
                         GetRandomPositionInBounds()
                     );
                     break;
                 case EnemySpawner.SpawnMethod.Random:
                     int index = Random.Range(0, Enemies.Count);
                     EnemySpawner.DoSpawnEnemy(
-                        EnemySpawner.Enemies.FindIndex((enemy) => enemy.Equals(Enemies[index])),
+                        EnemySpawner.WeightedEnemies.FindIndex((enemy) => enemy.Enemy.Equals(Enemies[index])),
                         GetRandomPositionInBounds()
                     );
                     break;

@@ -4975,6 +4975,7 @@ MonoBehaviour:
   MoveSpeed: 10
   Damage: 50
   Rigidbody: {fileID: 213575990352957236}
+  ExplosionVFXAsset: {fileID: 8926484042661614526, guid: 0c144a879f3f3492590ce19ee3bf88c3, type: 3}
 --- !u!136 &7282501549902777728
 CapsuleCollider:
   m_ObjectHideFlags: 0
