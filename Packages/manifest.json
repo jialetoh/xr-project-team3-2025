@@ -1,21 +1,50 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "nickmaltbie",
+      "url": "https://registry.npmjs.org",
+      "scopes": [
+        "com.nickmaltbie"
+      ]
+    }
+  ],
   "dependencies": {
     "com.meta.xr.sdk.all": "81.0.0",
+    "com.meta.xr.sdk.interaction.ovr": "78.0.0",
+    "com.meta.xr.simulator": "78.0.0",
+    "com.nickmaltbie.openkcc": "1.5.0",
+    "com.nickmaltbie.recolorshaderunity": "1.0.0",
+    "com.nickmaltbie.screenmanager": "3.1.0",
+    "com.nickmaltbie.statemachineunity": "1.3.0",
+    "com.nickmaltbie.statemachineunity.netcode": "1.4.0",
+    "com.nickmaltbie.testutilsunity": "1.0.0",
     "com.unity.ai.navigation": "2.0.9",
-    "com.unity.collab-proxy": "2.10.2",
-    "com.unity.feature.development": "1.0.2",
+    "com.unity.cinemachine": "2.10.4",
+    "com.unity.collab-proxy": "2.10.0",
+    "com.unity.editorcoroutines": "1.0.0",
     "com.unity.ide.rider": "3.0.38",
-    "com.unity.ide.visualstudio": "2.0.25",
-    "com.unity.inputsystem": "1.16.0",
-    "com.unity.multiplayer.center": "1.0.1",
-    "com.unity.render-pipelines.universal": "17.3.0",
+    "com.unity.ide.visualstudio": "2.0.23",
+    "com.unity.inputsystem": "1.14.2",
+    "com.unity.multiplayer.center": "1.0.0",
+    "com.unity.multiplayer.tools": "2.2.6",
+    "com.unity.netcode.gameobjects": "1.14.1",
+    "com.unity.probuilder": "6.0.7",
+    "com.unity.progrids": "3.0.3-preview.6",
+    "com.unity.recorder": "5.1.2",
+    "com.unity.render-pipelines.universal": "17.2.0",
     "com.unity.test-framework": "1.6.0",
+    "com.unity.testtools.codecoverage": "1.2.6",
     "com.unity.timeline": "1.8.9",
+    "com.unity.toolchain.win-x86_64-linux-x86_64": "2.0.10",
+    "com.unity.transport": "2.5.3",
     "com.unity.ugui": "2.0.0",
-    "com.unity.visualscripting": "1.9.9",
-    "com.unity.xr.openxr": "1.16.0",
+    "com.unity.visualeffectgraph": "17.2.0",
+    "com.unity.visualscripting": "1.9.7",
+    "com.unity.xr.interaction.toolkit": "3.2.2",
+    "com.unity.xr.management": "4.5.2",
+    "com.unity.xr.openxr": "1.15.1",
+    "com.veriorpies.parrelsync": "https://github.com/VeriorPies/ParrelSync.git?path=/ParrelSync",
     "com.unity.modules.accessibility": "1.0.0",
-    "com.unity.modules.adaptiveperformance": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -42,11 +71,15 @@
     "com.unity.modules.unitywebrequestaudio": "1.0.0",
     "com.unity.modules.unitywebrequesttexture": "1.0.0",
     "com.unity.modules.unitywebrequestwww": "1.0.0",
-    "com.unity.modules.vectorgraphics": "1.0.0",
     "com.unity.modules.vehicles": "1.0.0",
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "testables": [
+    "com.nickmaltbie.testutilsunity",
+    "com.unity.inputsystem",
+    "com.unity.netcode.gameobjects"
+  ]
 }
