@@ -1281,8 +1281,8 @@ MonoBehaviour:
   weaponAudioSource: {fileID: 4508544065337113484}
   equipSound: {fileID: 8300000, guid: 8d3ada9138d079a49a9b54bffb5e353e, type: 3}
   muzzleTransform: {fileID: 1191502372414670663}
-  projectilePrefab: {fileID: 0}
-  bulletSpeed: 50
+  projectilePrefab: {fileID: 6107378038584718357, guid: b927e7571c176ed44a5e263315ebfd79, type: 3}
+  bulletSpeed: 300
   fireRate: 2
   spreadAngle: 1
   magazineSize: 30

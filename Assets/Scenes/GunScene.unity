@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &69712936 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6107378038584718357, guid: b927e7571c176ed44a5e263315ebfd79, type: 3}
-  m_PrefabInstance: {fileID: 2127554488}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &81194820
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 5311364072357557699, guid: c4f491c97d54d4e4cb265fef412b2165, type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 863974632}
+      objectReference: {fileID: 8489818951931819000, guid: 76d6965a82c700547ac9c860a6e92ca9, type: 3}
     - target: {fileID: 5311364072357557699, guid: c4f491c97d54d4e4cb265fef412b2165, type: 3}
       propertyPath: grabbableAmmoPrefab
       value: 
@@ -650,14 +645,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 117243177}
     m_Modifications:
-    - target: {fileID: 4082067402743721742, guid: 6289d31ac64ccb743a9e2886f210a9b9, type: 3}
-      propertyPath: bulletSpeed
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 4082067402743721742, guid: 6289d31ac64ccb743a9e2886f210a9b9, type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 69712936}
     - target: {fileID: 4082067402743721742, guid: 6289d31ac64ccb743a9e2886f210a9b9, type: 3}
       propertyPath: grabbableAmmoPrefab
       value: 
@@ -1797,11 +1784,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &863974632 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8489818951931819000, guid: 76d6965a82c700547ac9c860a6e92ca9, type: 3}
-  m_PrefabInstance: {fileID: 1259165565}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &896946583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2290,7 +2272,7 @@ PrefabInstance:
     - target: {fileID: 676961251336089637, guid: e92ab41c1fd8cfb4596141c48ed76e7d, type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 863974632}
+      objectReference: {fileID: 8489818951931819000, guid: 76d6965a82c700547ac9c860a6e92ca9, type: 3}
     - target: {fileID: 676961251336089637, guid: e92ab41c1fd8cfb4596141c48ed76e7d, type: 3}
       propertyPath: grabbableAmmoPrefab
       value: 
@@ -2724,14 +2706,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297815092}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 28.237, y: 0.36, z: -0.086}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1521089637}
   - {fileID: 1415332623}
-  m_Father: {fileID: 2102977859}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1304548889
 PrefabInstance:
@@ -2887,11 +2869,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 692620813101715667, guid: e29fabfb196a141c1b9b35828289870f, type: 3}
   m_PrefabInstance: {fileID: 1304548889}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1325318660 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3489922258393200078, guid: 4d409630e9aa0d74cb9e7359305b15c6, type: 3}
-  m_PrefabInstance: {fileID: 1240054628}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1366159283 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1531799800421157526, guid: 43ac37425c23145488aebced59914f83, type: 3}
@@ -2957,7 +2934,7 @@ PrefabInstance:
     - target: {fileID: 6769181526827308222, guid: 01fdab2e3c9dde44191c95c192b204ed, type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 1325318660}
+      objectReference: {fileID: 3489922258393200078, guid: 4d409630e9aa0d74cb9e7359305b15c6, type: 3}
     - target: {fileID: 6769181526827308222, guid: 01fdab2e3c9dde44191c95c192b204ed, type: 3}
       propertyPath: grabbableAmmoPrefab
       value: 
@@ -4218,38 +4195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29b9800fdab41f9928af9179577cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireStaff
---- !u!1 &2102977858
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2102977859}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2102977859
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102977858}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 28.237, y: 0.36, z: -0.086}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1297815097}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &2127540550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4258,14 +4203,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 117243177}
     m_Modifications:
-    - target: {fileID: 4068803535624975479, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
-      propertyPath: bulletSpeed
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 4068803535624975479, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 6152012165266093810, guid: ec0581e8aa214204b9f01884e77f846c, type: 3}
     - target: {fileID: 4068803535624975479, guid: e7461e3cb4dfd384ea54841be167ca84, type: 3}
       propertyPath: grabbableAmmoPrefab
       value: 
@@ -4719,7 +4656,7 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 2102977859}
+  - {fileID: 1297815097}
   - {fileID: 945121688}
   - {fileID: 212184788}
   - {fileID: 117243177}
