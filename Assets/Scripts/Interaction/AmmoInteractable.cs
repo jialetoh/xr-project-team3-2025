@@ -1,23 +1,16 @@
 using UnityEngine;
 
-/// <summary>
-/// Unified ammo interactable for all gun types (magazines, shells, etc).
-/// Can be grabbed and inserted into the target gun.
-/// Uses FilteredTransform for smooth movement when grabbed.
-/// </summary>
+// For the ammo interactable at player's left pocket.
+// For the player to grab and insert into the target gun.
+
 public class AmmoInteractable : MonoBehaviour
 {
-    [Header("Visual")]
-    public Renderer visualRenderer;
+    public System.Action<AmmoInteractable> OnGrabbed;
 
-    [Header("Ammo Settings")]
+    [Header("Parameters")]
     public Transform spawnPoint;
     public float snapDistance = 0.1f;
-    public int ammoCount = 12;
-
-    [Header("Filtered Movement")]
-    [Tooltip("Reference to FilteredTransform for smooth grab movement. The ammo will follow this filtered position.")]
-    public Transform filteredTransform;
+    public int ammoCount = 12;    
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -29,12 +22,6 @@ public class AmmoInteractable : MonoBehaviour
     private GunWeapon _targetGun;
     private Transform _insertPoint;
     private bool _isGrabbed = false;
-
-    private void Awake()
-    {
-        if (visualRenderer == null)
-            visualRenderer = GetComponent<Renderer>();
-    }
 
     public void Initialize(GunWeapon gun, Transform insertPoint)
     {
@@ -50,6 +37,8 @@ public class AmmoInteractable : MonoBehaviour
 
         if (audioSource != null && grabClip != null)
             audioSource.PlayOneShot(grabClip);
+
+        OnGrabbed?.Invoke(this);
     }
 
     public void OnRelease()
@@ -73,11 +62,19 @@ public class AmmoInteractable : MonoBehaviour
     {
         if (!_isGrabbed) return;
 
-        // Use filtered transform if available for smoother movement
-        Transform followTarget = filteredTransform != null ? filteredTransform : grabber;
+        // Follow the grabber's transform with the original grab offset maintained
+        transform.position = grabber.position + grabber.rotation * _grabOffset;
+        transform.rotation = grabber.rotation;
 
-        transform.position = followTarget.position + followTarget.rotation * _grabOffset;
-        transform.rotation = followTarget.rotation;
+        // Auto-insert if close enough to mag insert point
+        if (_insertPoint != null && _targetGun != null)
+        {
+            float distance = Vector3.Distance(transform.position, _insertPoint.position);
+            if (distance <= snapDistance && _targetGun.CanInsertAmmo())
+            {
+                InsertIntoGun();
+            }
+        }
     }
 
     private void InsertIntoGun()
@@ -87,8 +84,14 @@ public class AmmoInteractable : MonoBehaviour
 
         HapticsManager.Instance?.PulseReloadLeft();
 
-        _grabber = null;
-        _isGrabbed = false;
+        // If this was auto-inserted while grabbed, reset the grab state
+        // so the ray reappears and the input handler clears its grabbed reference
+        if (_isGrabbed)
+        {
+            _isGrabbed = false;
+            _grabber = null;
+            GunInputHandler.ForceReleaseGrab();
+        }
 
         // Pass this GameObject to become the new magazine visual in the gun
         _targetGun.InsertAmmo(ammoCount, gameObject);
@@ -99,10 +102,9 @@ public class AmmoInteractable : MonoBehaviour
 
     private void ReturnToSpawn()
     {
-        if (spawnPoint != null)
-        {
-            transform.position = spawnPoint.position;
-            transform.rotation = spawnPoint.rotation;
-        }
+        // Destroy this ammo instance since a new one was already spawned when grabbed
+        // This prevents ammo from stacking up at the spawn point
+        Debug.Log($"AmmoInteractable: Destroying ungrabbed ammo at position {transform.position}");
+        Destroy(gameObject);
     }
 }

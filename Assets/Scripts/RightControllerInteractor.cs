@@ -4,39 +4,57 @@ using UnityEngine;
 
 public class RightControllerInteractor : MonoBehaviour
 {
+    [Header("Weapons")]
     public List<Weapon> weaponPrefabs;
     [HideInInspector] public Weapon CurrentWeapon;
     private int currentWeaponIndex = 0;
 
     [SerializeField] private float switchCooldown = 0.3f;
-    [SerializeField] private float thumbstickThreshold = 0.7f;
+    [SerializeField] private float thumbstickThreshold = 0.1f;
     private float _switchTimer = 0f;
 
     public AmmoSpawner ammoSpawner;
     public event Action<Weapon> OnWeaponChanged;
 
+    private readonly Dictionary<int, WeaponState> _weaponStates = new();
+    private bool _isFirstEquip = true;
+
     private void Awake()
     {
         EquipWeapon(currentWeaponIndex);
+        _isFirstEquip = false;
     }
 
     private void EquipWeapon(int index)
     {
-        // Unequip first
+        // Save current weapon state before destroying
         if (CurrentWeapon != null)
         {
             // Reset input state on the old weapon (polymorphic - each weapon cleans up its own state)
             CurrentWeapon.ResetInputState();
             CurrentWeapon.OnUnequip();
+
+            // Save state based on weapon type
+            if (CurrentWeapon is Shotgun shotgunWeapon)
+                _weaponStates[currentWeaponIndex] = new ShotgunState(shotgunWeapon);
+            else if (CurrentWeapon is GunWeapon gunWeapon)
+                _weaponStates[currentWeaponIndex] = new WeaponState(gunWeapon);
+
             ammoSpawner.OnWeaponUnequipped();
             Destroy(CurrentWeapon.gameObject);
         }
 
-        // Equip
+        // Create new weapon instance
         Weapon prefab = weaponPrefabs[index];
         CurrentWeapon = Instantiate(prefab, transform);
-        CurrentWeapon.OnEquip();
 
+        // Restore saved state if it exists
+        if (_weaponStates.ContainsKey(index) && CurrentWeapon is GunWeapon gun)
+        {
+            _weaponStates[index].ApplyTo(gun);
+        }
+
+        CurrentWeapon.OnEquip(!_isFirstEquip);
         ammoSpawner.OnWeaponEquipped(CurrentWeapon);
 
         // Notify subscribers (LeftControllerInteractor)
@@ -56,7 +74,8 @@ public class RightControllerInteractor : MonoBehaviour
         if (_switchTimer <= 0f)
         {
             // Weapon switch is controlled by right thumbstick
-            Vector2 stick = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick, OVRInput.Controller.RTouch);
+            Vector2 stick = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+
             if (stick.y >= thumbstickThreshold)
             {
                 // Next weapon

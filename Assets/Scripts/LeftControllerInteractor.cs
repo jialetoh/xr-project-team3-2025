@@ -29,3 +29,4 @@ public class LeftControllerInteractor : MonoBehaviour
         rightController.OnWeaponChanged -= HandleWeaponChanged;
     }
 }
+

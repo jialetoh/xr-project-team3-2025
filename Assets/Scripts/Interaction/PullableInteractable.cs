@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// Generic pullable interactable for slides, charging handles, pump actions, etc.
@@ -7,42 +6,30 @@ using UnityEngine.Events;
 /// </summary>
 public class PullableInteractable : MonoBehaviour
 {
-    [Header("Visual")]
-    public Renderer visualRenderer;
-
     [Header("Pull Settings")]
-    public Transform pullTransform;              // The visual object to move
+    [HideInInspector] public Transform pullTransform;              // The visual object to move
     public Vector3 restLocalPosition;            // Local position at rest
     public Vector3 pulledLocalPosition;          // Local position when fully pulled
     public float pullThreshold = 0.9f;           // 0-1, how far to pull to trigger action
 
     [Header("Audio")]
     public AudioSource audioSource;
-    public AudioClip grabClip;
-    public AudioClip releaseClip;
-
-    [Header("Filtered Movement")]
-    [Tooltip("Reference to FilteredTransform for smooth pull tracking. Uses filtered position for smoother input.")]
-    public Transform filteredTransform;
-
-    [Header("Events")]
-    public UnityEvent onPullComplete;            // Fired when pulled past threshold and released
+    public AudioClip pullableGrabbedClip;
+    public AudioClip pullablePulledClip;    // Plays when pulled past threshold
+    public AudioClip pullableReleasedClip;
 
     private GunWeapon _parentGun;
     private Transform _grabber;
     private Vector3 _grabStartHandPosition;
     private float _currentPullAmount = 0f;
     private bool _isBeingPulled = false;
+    private bool _hasPlayedPulledSound = false;
 
     private void Awake()
     {
         _parentGun = GetComponentInParent<GunWeapon>();
 
-        if (pullTransform == null)
-            pullTransform = transform;
-
-        if (visualRenderer == null)
-            visualRenderer = GetComponent<Renderer>();
+        pullTransform = transform;
 
         restLocalPosition = pullTransform.localPosition;
     }
@@ -60,14 +47,11 @@ public class PullableInteractable : MonoBehaviour
         if (!CanInteract()) return;
 
         _grabber = grabber;
-
-        // Use filtered transform for initial position if available
-        Transform trackTarget = filteredTransform != null ? filteredTransform : grabber;
-        _grabStartHandPosition = trackTarget.position;
+        _grabStartHandPosition = grabber.position;
         _isBeingPulled = true;
 
-        if (audioSource != null && grabClip != null)
-            audioSource.PlayOneShot(grabClip);
+        if (audioSource != null && pullableGrabbedClip != null)
+            audioSource.PlayOneShot(pullableGrabbedClip);
     }
 
     public void OnRelease()
@@ -77,17 +61,18 @@ public class PullableInteractable : MonoBehaviour
         // Check if pulled far enough to trigger action
         if (_currentPullAmount >= pullThreshold)
         {
-            onPullComplete?.Invoke();
-            NotifyParentGun();
+            NotifyParentGunRelease();
         }
+
+        // Play release sound
+        if (audioSource != null && pullableReleasedClip != null)
+            audioSource.PlayOneShot(pullableReleasedClip);
 
         // Snap back to rest position
         pullTransform.localPosition = restLocalPosition;
         _currentPullAmount = 0f;
         _isBeingPulled = false;
-
-        if (audioSource != null && releaseClip != null)
-            audioSource.PlayOneShot(releaseClip);
+        _hasPlayedPulledSound = false; // Reset for next pull
 
         _grabber = null;
     }
@@ -96,11 +81,8 @@ public class PullableInteractable : MonoBehaviour
     {
         if (!_isBeingPulled || _grabber == null) return;
 
-        // Use filtered transform for smoother tracking if available
-        Transform trackTarget = filteredTransform != null ? filteredTransform : grabber;
-
         // Calculate hand movement delta
-        Vector3 handDelta = trackTarget.position - _grabStartHandPosition;
+        Vector3 handDelta = grabber.position - _grabStartHandPosition;
 
         // Project onto pull direction (backward relative to gun)
         Transform gunTransform = _parentGun != null ? _parentGun.transform : transform.parent;
@@ -111,16 +93,35 @@ public class PullableInteractable : MonoBehaviour
         float maxPullDistance = Vector3.Distance(restLocalPosition, pulledLocalPosition);
         _currentPullAmount = Mathf.Clamp01(pullDistance / maxPullDistance);
 
+        // Play pulled sound and notify gun when crossing threshold (one-time)
+        if (_currentPullAmount >= pullThreshold && !_hasPlayedPulledSound)
+        {
+            if (audioSource != null && pullablePulledClip != null)
+                audioSource.PlayOneShot(pullablePulledClip);
+
+            // Notify gun that pullable was pulled back
+            NotifyParentGunPulled();
+            _hasPlayedPulledSound = true;
+        }
+
         // Update visual position (constrained to defined axis)
         pullTransform.localPosition = Vector3.Lerp(restLocalPosition, pulledLocalPosition, _currentPullAmount);
     }
 
-    private void NotifyParentGun()
+    private void NotifyParentGunPulled()
     {
         if (_parentGun == null) return;
 
-        // Call base class RackSlide - handles all gun types uniformly
-        _parentGun.RackSlide();
+        // Called when pullable crosses threshold
+        _parentGun.OnPullablePulled();
+    }
+
+    private void NotifyParentGunRelease()
+    {
+        if (_parentGun == null) return;
+
+        // Called when pullable is released
+        _parentGun.OnPullableReleased();
     }
 
     public void LockBack()

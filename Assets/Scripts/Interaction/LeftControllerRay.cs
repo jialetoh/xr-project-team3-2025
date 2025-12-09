@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Handles ray rendering, ray hits, and changes object colour based on ray interaction
 public class LeftControllerRay : MonoBehaviour
 {
     [Header("Ray Parameters")]
@@ -14,17 +15,36 @@ public class LeftControllerRay : MonoBehaviour
     [Header("Hit Caching")]
     [SerializeField] private float hitObjectCacheTime = 0.2f;
     private float _hitObjectCacheTimer;
-    public GameObject CurrentHitObject;
     private GameObject _lastHitObject;
+    [HideInInspector] public GameObject CurrentHitObject;
+
+    [Header("Ray Interaction")]
+    [SerializeField] private Color NormalColor = Color.white;
+    [SerializeField] private Color HoverColor = Color.green;
+    [SerializeField] private Color GrabColor = Color.red;
+    private bool _isGrabbing = false;
+
 
     private void Awake()
     {
         RayOrigin = transform;
     }
 
+    private void OnEnable()
+    {
+        GunInputHandler.OnGrabPressed += TriggerGrabbing;
+        GunInputHandler.OnGrabReleased += TriggerNonGrabbing;
+    }
+
+    private void OnDisable()
+    {
+        GunInputHandler.OnGrabPressed -= TriggerGrabbing;
+        GunInputHandler.OnGrabReleased -= TriggerNonGrabbing;
+    }
+
     private void Start()
     {
-        SetRayColor(rayColor);
+        SetObjectColor(rayCylinder, rayColor);
         SetRayActive(false);
     }
 
@@ -32,25 +52,27 @@ public class LeftControllerRay : MonoBehaviour
     {
         if (!_isRayActive) return;
 
-        RenderRay();
-        HandleRaycast();
+        if (!_isGrabbing)
+        {
+            RenderRay();
+            HandleRaycast();
+        }
     }
 
+
+    // Called on weapon change, active if weapon has left controller interactions
     public void SetRayActive(bool active)
     {
-        _isRayActive = active;
-        if (rayCylinder != null)
-        {
-            rayCylinder.SetActive(active);
-        }
+        // Reset everything on weapon change
+        _isGrabbing = false;
+        CurrentHitObject = null;
+        if (_lastHitObject != null) { SetObjectColor(_lastHitObject, NormalColor); }
+        _lastHitObject = null;
+        _hitObjectCacheTimer = 0f;
 
-        if (!active)
-        {
-            // Clear hit state when deactivating
-            CurrentHitObject = null;
-            _lastHitObject = null;
-            _hitObjectCacheTimer = 0f;
-        }
+        // Ray visibility
+        _isRayActive = active;
+        rayCylinder.SetActive(active);
     }
 
     private Ray ConstructRay()
@@ -66,29 +88,55 @@ public class LeftControllerRay : MonoBehaviour
         rayCylinder.transform.localScale = new Vector3(cylinderScaleFactor, rayLength / 2, cylinderScaleFactor);
     }
 
+    private bool CheckHit(Ray ray)
+    {
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, rayLength, interactableLayer))
+        {
+            CurrentHitObject = hitInfo.collider.gameObject;
+            Debug.Log("Current Hit Object: " + CurrentHitObject.name);
+
+            // Reset previous object colour
+            if (_lastHitObject != null && _lastHitObject != CurrentHitObject)
+            {
+                SetObjectColor(_lastHitObject, NormalColor);
+            }
+            // Update current object colour
+            SetObjectColor(CurrentHitObject, HoverColor);
+
+            // Debug
+            if (_lastHitObject != CurrentHitObject) { Debug.Log("Hit Object: " + CurrentHitObject.name); }
+
+            return true;
+        }
+        return false;
+    }
+
     private void HandleRaycast()
     {
         Ray ray = ConstructRay();
 
         if (CheckHit(ray))
         {
-            // Hit something - reset cache timer and update state
+            // When the ray hits an object, reset the hit object cache timer and update the last hit object.
             _hitObjectCacheTimer = hitObjectCacheTime;
             _lastHitObject = CurrentHitObject;
         }
         else
         {
-            // No hit - use caching (coyote time) to maintain last hit object
-            if (_hitObjectCacheTimer > 0f)
+            // This part is to cache the last hit object for a short period of time to "remember" the object being pointed at.
+            if (_hitObjectCacheTimer > 0.0f)
             {
+                // The timer is still running, keep the last hit object as the current hit object.
                 _hitObjectCacheTimer -= Time.deltaTime;
                 CurrentHitObject = _lastHitObject;
             }
             else
             {
-                // Cache expired - clear hit state
+                // The timer has expired, clear the last hit object and current hit object.
                 if (_lastHitObject != null)
                 {
+                    // Reset previous object colour
+                    SetObjectColor(_lastHitObject, NormalColor);
                     _lastHitObject = null;
                 }
                 CurrentHitObject = null;
@@ -96,26 +144,36 @@ public class LeftControllerRay : MonoBehaviour
         }
     }
 
-    private bool CheckHit(Ray ray)
-    {
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, rayLength, interactableLayer))
-        {
-            CurrentHitObject = hitInfo.collider.gameObject;
-            return true;
-        }
-        return false;
-    }
-
     public void SetObjectColor(GameObject target, Color color)
     {
-        if (target != null && target.TryGetComponent<Renderer>(out var renderer))
+        if (target.TryGetComponent<Renderer>(out var renderer))
         {
             renderer.material.color = color;
         }
     }
 
-    private void SetRayColor(Color color)
+    // Called when GunInputHandler.OnGrabPressed event fires
+    private void TriggerGrabbing()
     {
-        SetObjectColor(rayCylinder, color);
+        if (CurrentHitObject != null)
+        {
+            Debug.Log("LeftControllerRay: Grabbing...");
+            _isGrabbing = true;
+            SetObjectColor(CurrentHitObject, GrabColor);
+            rayCylinder.SetActive(false);
+        }
+    }
+
+    // Called when GunInputHandler.OnGrabReleased event fires
+    private void TriggerNonGrabbing()
+    {
+        if (_isGrabbing)
+        {
+            Debug.Log("LeftControllerRay: Releasing...");
+            SetObjectColor(CurrentHitObject, NormalColor);
+            CurrentHitObject = null;
+            _isGrabbing = false;
+            rayCylinder.SetActive(_isRayActive);
+        }
     }
 }
