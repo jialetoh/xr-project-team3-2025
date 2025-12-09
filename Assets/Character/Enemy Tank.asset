@@ -22,7 +22,7 @@ MonoBehaviour:
   DefaultState: 2
   IdleLocationRadius: 4
   IdleMovespeedMultiplier: 0.5
-  Waypoints: 4
+  Waypoints: 8
   LineOfSightRange: 10
   FieldOfView: 90
   AIUpdateInterval: 0.1
@@ -34,5 +34,5 @@ MonoBehaviour:
   Height: 2
   ObstacleAvoidanceType: 3
   Radius: 0.4
-  Speed: 2.5
+  Speed: 2.25
   StoppingDistance: 0.5
