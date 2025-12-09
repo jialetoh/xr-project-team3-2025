@@ -50,8 +50,8 @@ public abstract class Projectile : MonoBehaviour
     protected virtual void OnHit(Collider other)
     {
         // Deal damage
-        // IDamageable damageable = other.GetComponentInParent<IDamageable>();
-        // if (damageable != null) damageable.TakeDamage(damage);
+        IDamageable damageable = other.GetComponentInParent<IDamageable>();
+        if (damageable != null) damageable.TakeDamage(damage);
 
         // Play impact sound
         PlayImpactSound();

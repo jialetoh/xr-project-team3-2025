@@ -663,13 +663,13 @@ MonoBehaviour:
   weaponAudioSource: {fileID: 3533689378246159752}
   equipSound: {fileID: 8300000, guid: ad5c97dd17dfe55488240db085343f47, type: 3}
   muzzleTransform: {fileID: 8263859061420625488}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 8489818951931819000, guid: 76d6965a82c700547ac9c860a6e92ca9, type: 3}
   bulletSpeed: 500
-  fireRate: 2
+  fireRate: 0.5
   spreadAngle: 1
-  magazineSize: 12
-  ammoInMagazine: 12
-  ammoReserve: 36
+  magazineSize: 30
+  ammoInMagazine: 30
+  ammoReserve: 90
   grabbableAmmoPrefab: {fileID: 0}
   ammoInsertPoint: {fileID: 4422912898565430824}
   magazineVisual: {fileID: 613444212601763668}

@@ -1283,11 +1283,11 @@ MonoBehaviour:
   muzzleTransform: {fileID: 1191502372414670663}
   projectilePrefab: {fileID: 6107378038584718357, guid: b927e7571c176ed44a5e263315ebfd79, type: 3}
   bulletSpeed: 300
-  fireRate: 2
+  fireRate: 8
   spreadAngle: 1
-  magazineSize: 30
-  ammoInMagazine: 30
-  ammoReserve: 36
+  magazineSize: 60
+  ammoInMagazine: 60
+  ammoReserve: 120
   grabbableAmmoPrefab: {fileID: 0}
   ammoInsertPoint: {fileID: 111248497637695585}
   magazineVisual: {fileID: 3457886949980906921}

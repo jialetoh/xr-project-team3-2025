@@ -190,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 560404245000264682}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pistol_B_EjectionPort
   m_TagString: Untagged
   m_Icon: {fileID: 0}

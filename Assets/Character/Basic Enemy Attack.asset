@@ -20,4 +20,4 @@ MonoBehaviour:
   SpawnHeightOffset: 1
   LineOfSightLayers:
     serializedVersion: 2
-    m_Bits: 137
+    m_Bits: 257

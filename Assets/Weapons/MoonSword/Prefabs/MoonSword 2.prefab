@@ -4862,7 +4862,7 @@ GameObject:
   - component: {fileID: 3537298073355975195}
   - component: {fileID: 7746886452717280526}
   - component: {fileID: 1220227163277848711}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MoonSword 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

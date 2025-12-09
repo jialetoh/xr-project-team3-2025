@@ -14,11 +14,11 @@ TagManager:
   - UI
   - Interactable
   - Overlay UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Player Attack
+  - Enemy Attack
+  - Enemy Tank Attack
+  - Fireball
   - 
   - 
   - 

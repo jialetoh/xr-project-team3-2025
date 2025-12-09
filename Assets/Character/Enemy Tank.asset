@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyScriptableObject
   Prefab: {fileID: 3237888490003597961, guid: a456792f0525748929c4cef21b6ed866, type: 3}
   AttackConfiguration: {fileID: 11400000, guid: 81ff9ad885ae14eefa1a7b92f33382fb, type: 2}
-  Health: 1000
+  Health: 150
   AttackDelay: 2.5
-  Damage: 50
+  Damage: 30
   AttackRadius: 10
   HasRangedAttack: 1
   DefaultState: 2

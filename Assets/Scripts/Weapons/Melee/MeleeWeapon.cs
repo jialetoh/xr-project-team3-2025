@@ -128,8 +128,8 @@ public abstract class MeleeWeapon : Weapon
     protected virtual void OnHit(Collider other)
     {
         // Override in subclasses for specific damage logic
-        // IDamageable damageable = other.GetComponentInParent<IDamageable>();
-        // if (damageable != null) damageable.TakeDamage(damage);
+        IDamageable damageable = other.GetComponentInParent<IDamageable>();
+        if (damageable != null) damageable.TakeDamage(damage);
 
         // Play impact sound with velocity-based variation
         PlayImpactSound(_velocity.magnitude);

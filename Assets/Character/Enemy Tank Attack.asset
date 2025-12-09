@@ -16,8 +16,8 @@ MonoBehaviour:
   Damage: 50
   AttackRadius: 10
   AttackDelay: 2.5
-  FireballPrefab: {fileID: 5487443417038037780, guid: 45eaa97ea035c486484a2581dd7c84bf, type: 3}
+  FireballPrefab: {fileID: 5487443417038037780, guid: 10681f5371e22493285d422bcd6be2c6, type: 3}
   SpawnHeightOffset: 1.1
   LineOfSightLayers:
     serializedVersion: 2
-    m_Bits: 137
+    m_Bits: 257
