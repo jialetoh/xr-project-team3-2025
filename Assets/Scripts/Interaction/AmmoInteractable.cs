@@ -10,7 +10,9 @@ public class AmmoInteractable : MonoBehaviour
     [Header("Parameters")]
     public Transform spawnPoint;
     public float snapDistance = 0.1f;
-    public int ammoCount = 12;    
+    public int ammoCount = 12;
+
+    private bool _isActiveAmmo = true; // Tracks if this is the current active ammo at spawn point    
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -40,8 +42,8 @@ public class AmmoInteractable : MonoBehaviour
 
     private void Update()
     {
-        // When not grabbed, follow the spawn point (player's left pocket)
-        if (!_isGrabbed && spawnPoint != null)
+        // When not grabbed and still active, follow the spawn point (player's left pocket)
+        if (!_isGrabbed && _isActiveAmmo && spawnPoint != null)
         {
             transform.position = spawnPoint.TransformPoint(_spawnOffset);
             transform.rotation = spawnPoint.rotation * _spawnRotationOffset;
@@ -53,6 +55,7 @@ public class AmmoInteractable : MonoBehaviour
         _grabber = grabber;
         _grabOffset = transform.position - grabber.position;
         _isGrabbed = true;
+        _isActiveAmmo = false; // No longer the active ammo at spawn point
 
         if (audioSource != null && grabClip != null)
             audioSource.PlayOneShot(grabClip);

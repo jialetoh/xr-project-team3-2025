@@ -56,9 +56,11 @@ public class AmmoSpawner : MonoBehaviour
     {
         ammo.OnGrabbed -= HandleAmmoGrabbed;
 
+        // Mark that we no longer track this ammo (it's now grabbed and will either insert or be destroyed)
+        _currentAmmoInstance = null;
+
         if (_currentGun != null)
         {
-            _currentAmmoInstance = null;
             SpawnAmmo(_currentGun);
         }
     }
