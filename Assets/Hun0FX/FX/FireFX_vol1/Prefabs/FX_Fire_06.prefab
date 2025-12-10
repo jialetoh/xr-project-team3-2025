@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2386159082878823986}
   - component: {fileID: 3138630753680420011}
   - component: {fileID: 3201745284045571853}
-  - component: {fileID: 1315535311835322162}
   - component: {fileID: 4380381321300749537}
-  m_Layer: 0
+  - component: {fileID: 1830778348540547166}
+  m_Layer: 9
   m_Name: FX_Fire_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4928,7 +4928,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -4968,26 +4968,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1315535311835322162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2386159082878823987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcc8fc6b1c48543a28fb8ecd32c8eae0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Fireball
-  AutoDestroyTime: 5
-  MoveSpeed: 5
-  Damage: 50
-  Rigidbody: {fileID: 3138630753680420011}
-  ExplosionVFXAsset: {fileID: 8926484042661614526, guid: 0c144a879f3f3492590ce19ee3bf88c3, type: 3}
-  ExplosionAnimationDuration: 1.5
-  FireballSound: {fileID: 8300000, guid: d0d0b7f865e3a50448df4610cf2681dd, type: 3}
-  ExplosionSound: {fileID: 8300000, guid: 222141dd968fb6447b5c790b6d87a27b, type: 3}
 --- !u!135 &4380381321300749537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5009,6 +4989,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1830778348540547166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386159082878823987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5569cb27ec3145f6a7b244cd8235445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SingleTargetFireball
+  damage: 30
+  lifetime: 5
+  projectileAudioSource: {fileID: 3201745284045571853}
+  impactClip: {fileID: 8300000, guid: 222141dd968fb6447b5c790b6d87a27b, type: 3}
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 9
+  impactEffectPrefab: {fileID: 0}
 --- !u!1 &2386159083210497856
 GameObject:
   m_ObjectHideFlags: 0
@@ -5035,13 +5035,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2386159083210497856}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2386159082878823984}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!198 &2386159083210497885
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9880,13 +9880,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2386159083551692194}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2386159082878823984}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.409}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!198 &2386159083551692223
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -14716,13 +14716,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2386159083557026794}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2386159082878823984}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.409}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!198 &2386159083557026791
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -19552,13 +19552,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2386159084091610996}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2386159082878823984}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.409}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!198 &2386159084091610993
 ParticleSystem:
   m_ObjectHideFlags: 0
