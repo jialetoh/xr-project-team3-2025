@@ -3,7 +3,7 @@
 using UnityEngine;
 using UnityEngine.VFX;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(AudioSource))]
 public class Fireball : PoolableObject
 {
     [Header("Fireball Settings")]
@@ -25,18 +25,28 @@ public class Fireball : PoolableObject
     [SerializeField]
     private float ExplosionAnimationDuration = 1.5f;
 
+    [Header("Audio")]
+    [Tooltip("The AudioSource component for playing fireball sounds.")]
+    private AudioSource _audioSource;
+    [Tooltip("The sound played when the fireball is in play.")]
+    public AudioClip FireballSound;
+    [Tooltip("The sound played upon explosion.")]
+    public AudioClip ExplosionSound;
+
     private const string DISABLE_METHOD_NAME = "Disable";
 
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
         TrailRenderers = GetComponentsInChildren<TrailRenderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
     {
         CancelInvoke(DISABLE_METHOD_NAME);
         Invoke(DISABLE_METHOD_NAME, AutoDestroyTime);
+        PlayFireballSound();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,6 +58,7 @@ public class Fireball : PoolableObject
 
         // Play explosion effect at collision point
         PlayExplosionEffect();
+        PlayExplosionSound();
 
         Disable();
     }
@@ -69,6 +80,32 @@ public class Fireball : PoolableObject
         }
     }
 
+    private void PlayFireballSound()
+    {
+        if (_audioSource != null && FireballSound != null)
+        {
+            if (_audioSource.clip != FireballSound)
+            {
+                _audioSource.clip = FireballSound;
+                _audioSource.loop = true;
+            }
+            if (!_audioSource.isPlaying)
+            {
+                _audioSource.Play();
+            }
+        }
+    }
+
+    private void PlayExplosionSound()
+    {
+        // _audioSource.Stop();
+        // if (_audioSource != null && ExplosionSound != null)
+        // {
+        //     _audioSource.PlayOneShot(ExplosionSound);
+        // }
+        return;
+    }
+
     private void Disable()
     {
         CancelInvoke(DISABLE_METHOD_NAME);
@@ -78,6 +115,7 @@ public class Fireball : PoolableObject
         {
             trailRenderer.Clear();
         }
+        _audioSource.Stop();
 
         gameObject.SetActive(false);
     }

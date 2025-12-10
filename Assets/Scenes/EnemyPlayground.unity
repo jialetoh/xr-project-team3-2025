@@ -1438,7 +1438,7 @@ MonoBehaviour:
   m_VoxelSize: 0.13333334
   m_MinRegionArea: 0.5
   m_NavMeshData: {fileID: 23800000, guid: 137c31abcfb7648868d4e04df22c1973, type: 2}
-  m_BuildHeightMesh: 0
+  m_BuildHeightMesh: 1
 --- !u!43 &360817172
 Mesh:
   m_ObjectHideFlags: 0
@@ -2151,6 +2151,11 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!4 &808690657 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1928389238801210310, guid: 0ba88b23b077d354ba94e3d1c4f22966, type: 3}
+  m_PrefabInstance: {fileID: 1091240704}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &911915384
 Mesh:
   m_ObjectHideFlags: 0
@@ -2381,6 +2386,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1928389238801210314, guid: 0ba88b23b077d354ba94e3d1c4f22966, type: 3}
+      propertyPath: config.lookActionReference
+      value: 
+      objectReference: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 1928389238801210314, guid: 0ba88b23b077d354ba94e3d1c4f22966, type: 3}
+      propertyPath: config.zoomActionReference
+      value: 
+      objectReference: {fileID: 6240969308177333660, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 1928389240043740980, guid: 0ba88b23b077d354ba94e3d1c4f22966, type: 3}
+      propertyPath: jumpActionReference
+      value: 
+      objectReference: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 1928389240043740980, guid: 0ba88b23b077d354ba94e3d1c4f22966, type: 3}
+      propertyPath: moveActionReference
+      value: 
+      objectReference: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 1928389240043740980, guid: 0ba88b23b077d354ba94e3d1c4f22966, type: 3}
+      propertyPath: sprintActionReference
+      value: 
+      objectReference: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     - target: {fileID: 6826506219202058344, guid: 0ba88b23b077d354ba94e3d1c4f22966, type: 3}
       propertyPath: m_Actions
       value: 
@@ -4278,11 +4303,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!4 &2035552599 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1928389238801210310, guid: 0ba88b23b077d354ba94e3d1c4f22966, type: 3}
-  m_PrefabInstance: {fileID: 1091240704}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5991789415778873404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4292,9 +4312,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 415801657154007223, guid: 8b92a2e6a3f734cd0bf0b08c3249de7c, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 808690657}
+    - target: {fileID: 415801657154007223, guid: 8b92a2e6a3f734cd0bf0b08c3249de7c, type: 3}
       propertyPath: NumberOfEnemiesToSpawn
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 415801657154007223, guid: 8b92a2e6a3f734cd0bf0b08c3249de7c, type: 3}
+      propertyPath: WeightedEnemies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 415801657154007223, guid: 8b92a2e6a3f734cd0bf0b08c3249de7c, type: 3}
+      propertyPath: 'WeightedEnemies.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f7deec1f7a60147f2be265ed80bdf043, type: 2}
     - target: {fileID: 4768249883907592376, guid: 8b92a2e6a3f734cd0bf0b08c3249de7c, type: 3}
       propertyPath: m_Name
       value: EnemyManager
@@ -4339,66 +4371,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: Level
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 2035552599}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: Scaling
-      value: 
-      objectReference: {fileID: 11400000, guid: e3240966f94bf46cc88c8ca46e61b8f2, type: 2}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: EnemySpawnMethod
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: ContinuousSpawning
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: Enemies.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: 'Enemies.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 94167fcea397740eaa797ef34b0bb5fe, type: 2}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: 'Enemies.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 94167fcea397740eaa797ef34b0bb5fe, type: 2}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: 'Enemies.Array.data[3]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 94167fcea397740eaa797ef34b0bb5fe, type: 2}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: 'Enemies.Array.data[4]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 94167fcea397740eaa797ef34b0bb5fe, type: 2}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: 'Enemies.Array.data[5]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 94167fcea397740eaa797ef34b0bb5fe, type: 2}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: NumberOfEnemiesToSpawn
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: WeightedEnemies.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: 'WeightedEnemies.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 38b5bbd3a284b43b181a459e5386296d, type: 2}
-    - target: {fileID: 415801657154007223, guid: f276b926845aa460291ef4ebaab2d019, type: 3}
-      propertyPath: 'WeightedEnemies.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: f7deec1f7a60147f2be265ed80bdf043, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(SphereCollider), typeof(AudioSource))]
 public class AttackRadius : MonoBehaviour
 {
     [Header("Components")]
@@ -19,6 +19,12 @@ public class AttackRadius : MonoBehaviour
     [Tooltip("The list of damageable targets within the attack radius.")]
     protected List<IDamageable> Damageables = new();
 
+    [Header("Audio")]
+    [Tooltip("The AudioSource component for playing attack sounds.")]
+    private AudioSource _audioSource;
+    [Tooltip("The audio clip(s) played when an attack occurs.")]
+    public AudioClip[] AttackAudioClips;
+
     [Header("Attack Settings")]
     [Tooltip("The damage dealt to each damageable target.")]
     public int Damage = 10;
@@ -28,6 +34,7 @@ public class AttackRadius : MonoBehaviour
     protected virtual void Awake()
     {
         Collider = GetComponent<SphereCollider>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -88,6 +95,7 @@ public class AttackRadius : MonoBehaviour
             if (closestDamageable != null)
             {
                 OnAttack?.Invoke(closestDamageable);
+                PlayAttackSound();
                 closestDamageable.TakeDamage(Damage);
             }
 
@@ -105,5 +113,13 @@ public class AttackRadius : MonoBehaviour
     protected bool DisabledDamageables(IDamageable Damageable)
     {
         return Damageable != null && !Damageable.GetTransform().gameObject.activeSelf;
+    }
+
+    protected void PlayAttackSound()
+    {
+        if (AttackAudioClips.Length == 0) return;
+
+        int index = Random.Range(0, AttackAudioClips.Length);
+        _audioSource.PlayOneShot(AttackAudioClips[index]);
     }
 }

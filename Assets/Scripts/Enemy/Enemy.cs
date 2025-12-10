@@ -21,8 +21,16 @@ public class Enemy : PoolableObject, IDamageable
     public EnemyMovement Movement;
     [Tooltip("The NavMeshAgent component for the enemy.")]
     public NavMeshAgent Agent;
+    [Tooltip("The movement audio handler for the enemy.")]
+    public EnemyMovementAudioHandler MovementAudioHandler;
     [Tooltip("The scriptable object containing enemy configuration.")]
     public EnemyScriptableObject EnemyScriptableObject;
+
+    [Header("Audio")]
+    [Tooltip("The audio source played when the enemy is damaged.")]
+    public AudioSource DamagedAudioSource;
+    [Tooltip("The audio clip(s) played when the enemy is damaged.")]
+    public AudioClip[] DamagedAudioClips;
 
     [Header("Stats")]
     [Tooltip("The health of the enemy.")]
@@ -33,7 +41,6 @@ public class Enemy : PoolableObject, IDamageable
     // Callback for when this enemy dies
     public delegate void DeathEvent(Enemy enemy);
     public DeathEvent OnDeath;
-    private readonly static WaitForSeconds _waitForSeconds3 = new(3f);
 
     private void Awake()
     {
@@ -86,6 +93,8 @@ public class Enemy : PoolableObject, IDamageable
     public void TakeDamage(int Damage)
     {
         Health -= Damage;
+        PlayDamagedSound();
+
         if (Health <= 0)
         {
             StartCoroutine(KillSelf());
@@ -99,6 +108,9 @@ public class Enemy : PoolableObject, IDamageable
 
     private IEnumerator KillSelf()
     {
+        // Total duration of death animation: 3 seconds
+        WaitForSeconds wait = new(3f);
+
         // Disable movement and look behavior
         if (LookCoroutine != null)
         {
@@ -114,10 +126,17 @@ public class Enemy : PoolableObject, IDamageable
         // Notify spawner via callback
         OnDeath?.Invoke(this);
 
-        // Wait for death animation to play (3 seconds)
-        yield return _waitForSeconds3;
-
-        // Despawn the enemy
+        // Wait to despawn the enemy
+        yield return wait;
         gameObject.SetActive(false);
+    }
+
+    private void PlayDamagedSound()
+    {
+        if (DamagedAudioClips.Length == 0) return;
+
+        AudioClip clip = DamagedAudioClips[Random.Range(0, DamagedAudioClips.Length)];
+        DamagedAudioSource.clip = clip;
+        DamagedAudioSource.PlayOneShot(DamagedAudioSource.clip);
     }
 }

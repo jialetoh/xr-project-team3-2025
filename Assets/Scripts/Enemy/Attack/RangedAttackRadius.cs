@@ -68,6 +68,7 @@ public class RangedAttackRadius : AttackRadius
             if (targetDamageable != null)
             {
                 OnAttack?.Invoke(targetDamageable);
+                PlayAttackSound();
                 LaunchFireballToward(targetDamageable.GetTransform());
             }
 

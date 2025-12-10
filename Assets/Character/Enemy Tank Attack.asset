@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy Tank Attack
   m_EditorClassIdentifier: Assembly-CSharp::AttackScriptableObject
   IsRanged: 1
-  Damage: 50
+  Damage: 30
   AttackRadius: 10
   AttackDelay: 2.5
   FireballPrefab: {fileID: 5487443417038037780, guid: 10681f5371e22493285d422bcd6be2c6, type: 3}

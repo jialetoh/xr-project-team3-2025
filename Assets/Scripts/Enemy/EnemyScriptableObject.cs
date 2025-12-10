@@ -73,6 +73,22 @@ public class EnemyScriptableObject : ScriptableObject
     [Tooltip("The stopping distance of the NavMesh agent")]
     public float StoppingDistance = 0.5f;
 
+    [Header("Audio")]
+    [Tooltip("The audio clip(s) played when the enemy groans.")]
+    public AudioClip[] GroanAudioClips;
+    [Tooltip("The audio clip(s) played when the enemy is walking.")]
+    public AudioClip[] WalkAudioClips;
+    [Tooltip("The audio clip(s) played when the enemy is running.")]
+    public AudioClip[] RunAudioClips;
+    [Tooltip("The audio clip(s) played when the enemy is jumping.")]
+    public AudioClip[] JumpAudioClips;
+    [Tooltip("The audio clip(s) played when the enemy attacks.")]
+    public AudioClip[] AttackAudioClips;
+    [Tooltip("The audio clip(s) played when the enemy is damaged.")]
+    public AudioClip[] DamagedAudioClips;
+    [Tooltip("The audio clip played when the enemy dies.")]
+    public AudioClip DeathAudioClip;
+
     /// <summary>
     /// Scales up the enemy stats based on the provided scaling configuration and level.
     /// </summary>
@@ -111,11 +127,21 @@ public class EnemyScriptableObject : ScriptableObject
         scaledUpEnemy.Speed = Speed * Scaling.SpeedCurve.Evaluate(Level);
         scaledUpEnemy.StoppingDistance = StoppingDistance;
 
+        // Copy audio clips
+        scaledUpEnemy.GroanAudioClips = GroanAudioClips;
+        scaledUpEnemy.WalkAudioClips = WalkAudioClips;
+        scaledUpEnemy.RunAudioClips = RunAudioClips;
+        scaledUpEnemy.JumpAudioClips = JumpAudioClips;
+        scaledUpEnemy.AttackAudioClips = AttackAudioClips;
+        scaledUpEnemy.DamagedAudioClips = DamagedAudioClips;
+        scaledUpEnemy.DeathAudioClip = DeathAudioClip;
+
         return scaledUpEnemy;
     }
 
     public void SetUpEnemy(Enemy enemy)
     {
+        // Set up NavMeshAgent properties
         enemy.Agent.acceleration = Acceleration;
         enemy.Agent.angularSpeed = AngularSpeed;
         enemy.Agent.areaMask = AreaMask;
@@ -127,6 +153,7 @@ public class EnemyScriptableObject : ScriptableObject
         enemy.Agent.speed = Speed;
         enemy.Agent.stoppingDistance = StoppingDistance;
 
+        // Set up movement properties
         enemy.Movement.UpdateRate = AIUpdateInterval;
         enemy.Movement.DefaultState = DefaultState;
         enemy.Movement.IdleMovespeedMultiplier = IdleMovespeedMultiplier;
@@ -136,8 +163,17 @@ public class EnemyScriptableObject : ScriptableObject
         enemy.Movement.LineOfSightChecker.Collider.radius = LineOfSightRange;
         enemy.Movement.LineOfSightChecker.LineOfSightLayers = AttackConfiguration.LineOfSightLayers;
 
+        // Set up stats
         enemy.Health = Health;
-
         AttackConfiguration.SetupEnemy(enemy);
+
+        // Set up audio clips
+        enemy.DamagedAudioClips = DamagedAudioClips;
+        enemy.Movement.GroanAudioClips = GroanAudioClips;
+        enemy.MovementAudioHandler.WalkAudioClips = WalkAudioClips;
+        enemy.MovementAudioHandler.RunAudioClips = RunAudioClips;
+        enemy.MovementAudioHandler.JumpAudioClips = JumpAudioClips;
+        enemy.MovementAudioHandler.AttackAudioClips = AttackAudioClips;
+        enemy.MovementAudioHandler.DeathAudioClip = DeathAudioClip;
     }
 }
