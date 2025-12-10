@@ -22,11 +22,30 @@ public class AmmoInteractable : MonoBehaviour
     private GunWeapon _targetGun;
     private Transform _insertPoint;
     private bool _isGrabbed = false;
+    private Vector3 _spawnOffset;
+    private Quaternion _spawnRotationOffset;
 
     public void Initialize(GunWeapon gun, Transform insertPoint)
     {
         _targetGun = gun;
         _insertPoint = insertPoint;
+
+        // Store initial offset from spawn point so ammo follows the player
+        if (spawnPoint != null)
+        {
+            _spawnOffset = spawnPoint.InverseTransformPoint(transform.position);
+            _spawnRotationOffset = Quaternion.Inverse(spawnPoint.rotation) * transform.rotation;
+        }
+    }
+
+    private void Update()
+    {
+        // When not grabbed, follow the spawn point (player's left pocket)
+        if (!_isGrabbed && spawnPoint != null)
+        {
+            transform.position = spawnPoint.TransformPoint(_spawnOffset);
+            transform.rotation = spawnPoint.rotation * _spawnRotationOffset;
+        }
     }
 
     public void OnGrab(Transform grabber)
