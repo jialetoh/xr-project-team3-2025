@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PullableInteractable
   pullTransform: {fileID: 0}
   restLocalPosition: {x: 0, y: 0, z: 0}
-  pulledLocalPosition: {x: 0, y: 0, z: -0.0785}
+  pulledLocalPosition: {x: 0, y: 0, z: -0.075}
   pullThreshold: 0.9
   audioSource: {fileID: 4508544065337113484}
   pullableGrabbedClip: {fileID: 8300000, guid: b7405a53ba0893c45ba9f240d51605a2, type: 3}
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   equipSound: {fileID: 8300000, guid: 8d3ada9138d079a49a9b54bffb5e353e, type: 3}
   muzzleTransform: {fileID: 1191502372414670663}
   projectilePrefab: {fileID: 6107378038584718357, guid: b927e7571c176ed44a5e263315ebfd79, type: 3}
-  bulletSpeed: 300
+  bulletSpeed: 50
   fireRate: 8
   spreadAngle: 1
   magazineSize: 60
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   magazineEjectForce: 0.5
   hasRoundChambered: 1
   isBoltLocked: 0
-  pullableLocksBack: 1
+  pullableLocksBack: 0
   ejectionPort: {fileID: 4132254942943802904}
   ejectionForce: 2
   ejectionUpwardForce: 1
@@ -1322,7 +1322,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 110
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1360,7 +1360,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

@@ -23,8 +23,8 @@ MonoBehaviour:
   IdleLocationRadius: 4
   IdleMovespeedMultiplier: 0.5
   Waypoints: 8
-  LineOfSightRange: 10
-  FieldOfView: 90
+  LineOfSightRange: 15
+  FieldOfView: 135
   AIUpdateInterval: 0.1
   Acceleration: 8
   AngularSpeed: 120
@@ -34,7 +34,7 @@ MonoBehaviour:
   Height: 2
   ObstacleAvoidanceType: 3
   Radius: 0.4
-  Speed: 2.25
+  Speed: 4
   StoppingDistance: 0.5
   GroanAudioClips:
   - {fileID: 8300000, guid: 69812e02fdf6c421a938309cc2d45922, type: 3}
@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 80e9f3f626b53418ebb33bcc0bf2e7fd, type: 3}
   - {fileID: 8300000, guid: 8503c42970d2247a89300b4be374668c, type: 3}
   JumpAudioClips: []
+  AttackAudioClips: []
   DamagedAudioClips:
   - {fileID: 8300000, guid: fb7fbee5d5ed64bd1a8ca1ad242ba7eb, type: 3}
   - {fileID: 8300000, guid: 381951b7e211640659f2659520c3145b, type: 3}

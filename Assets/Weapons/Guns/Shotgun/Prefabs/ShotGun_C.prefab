@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 4232487450012596292}
   - component: {fileID: 489893190274483127}
   - component: {fileID: 8052965384984530395}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShotGun_C_Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 345426851393320835}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000003774895, y: -1.110223e-16, z: 1.11022296e-16, w: 1}
-  m_LocalPosition: {x: -0, y: 0.047749996, z: 0.18500006}
+  m_LocalPosition: {x: -0, y: 0.04775, z: 0.1850001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PullableInteractable
   pullTransform: {fileID: 0}
-  restLocalPosition: {x: 0, y: 0, z: 0}
-  pulledLocalPosition: {x: 0, y: 0, z: 0}
+  restLocalPosition: {x: 0, y: 0.04775, z: 0.1850001}
+  pulledLocalPosition: {x: 0, y: 0.0478, z: 0.1365}
   pullThreshold: 0.9
   audioSource: {fileID: 6459789871820821176}
   pullableGrabbedClip: {fileID: 8300000, guid: b7405a53ba0893c45ba9f240d51605a2, type: 3}
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 3271002687758103185}
   - component: {fileID: 3332927348158454575}
   - component: {fileID: 5847569077301261498}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ShotGun_C_Grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ MonoBehaviour:
   magazineEjectForce: 0.5
   hasRoundChambered: 1
   isBoltLocked: 0
-  pullableLocksBack: 1
+  pullableLocksBack: 0
   ejectionPort: {fileID: 9129176440814331970}
   ejectionForce: 2
   ejectionUpwardForce: 1
@@ -600,7 +600,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 110
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -638,7 +638,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

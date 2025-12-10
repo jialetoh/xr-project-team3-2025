@@ -4961,11 +4961,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 2efb45b9c536e9e4a8cc8d1e3070cc54, type: 3}
 --- !u!82 &7746886452717280526
@@ -4981,13 +4981,13 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 110
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -5025,7 +5025,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5092,9 +5092,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c5bb01bf2695a174997d7f6e4517ba9b, type: 3}
   - {fileID: 8300000, guid: 4a4b9981173e6fa46b68b2bab424747a, type: 3}
   - {fileID: 8300000, guid: f292cc0822aa0da4d9b1b368f33d2498, type: 3}
-  swingMinVelocity: 2
+  swingMinVelocity: 1
   swingMaxVelocity: 6
-  swingCooldown: 0.3
+  swingCooldown: 0.2
   swingPitchVariation: 0.15
   swingDirectionThreshold: 0.5
   impactSounds:

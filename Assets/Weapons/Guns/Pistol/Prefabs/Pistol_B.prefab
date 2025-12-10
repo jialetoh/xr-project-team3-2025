@@ -432,7 +432,7 @@ MonoBehaviour:
   equipSound: {fileID: 8300000, guid: 26068dfa1b06bd44ba65af96187f29fb, type: 3}
   muzzleTransform: {fileID: 2088429231765037987}
   projectilePrefab: {fileID: 6152012165266093810, guid: ec0581e8aa214204b9f01884e77f846c, type: 3}
-  bulletSpeed: 250
+  bulletSpeed: 50
   fireRate: 2
   spreadAngle: 1
   magazineSize: 12
@@ -472,7 +472,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 110
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -510,7 +510,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

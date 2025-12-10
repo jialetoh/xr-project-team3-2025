@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6599467199622528076}
   - component: {fileID: 5685471976751075086}
   - component: {fileID: 1114836261730799641}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet_Pistol_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,13 +107,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f8786aadfab4ddc9834e4ac6d3065f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  damage: 10
+  damage: 25
   lifetime: 5
   projectileAudioSource: {fileID: 6599467199622528076}
   impactClip: {fileID: 8300000, guid: 28035043174d44f928d428fc44f59150, type: 3}
   hitLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 9
 --- !u!82 &6599467199622528076
 AudioSource:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 3650473788905792028}
   - component: {fileID: 8653671056117806058}
   - component: {fileID: 2937224812861430432}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet_Pistol_A_Part
   m_TagString: Untagged
   m_Icon: {fileID: 0}

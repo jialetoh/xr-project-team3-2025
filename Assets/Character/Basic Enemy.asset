@@ -23,8 +23,8 @@ MonoBehaviour:
   IdleLocationRadius: 4
   IdleMovespeedMultiplier: 0.2
   Waypoints: 6
-  LineOfSightRange: 10
-  FieldOfView: 90
+  LineOfSightRange: 15
+  FieldOfView: 135
   AIUpdateInterval: 0.1
   Acceleration: 8
   AngularSpeed: 120
@@ -34,7 +34,7 @@ MonoBehaviour:
   Height: 2
   ObstacleAvoidanceType: 3
   Radius: 0.3
-  Speed: 2.5
+  Speed: 4.25
   StoppingDistance: 0.5
   GroanAudioClips:
   - {fileID: 8300000, guid: f462d308fc6a648b288adb78161502a5, type: 3}
