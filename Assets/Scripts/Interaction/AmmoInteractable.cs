@@ -60,6 +60,7 @@ public class AmmoInteractable : MonoBehaviour
         if (audioSource != null && grabClip != null)
             audioSource.PlayOneShot(grabClip);
 
+        // Fire event BEFORE setting _isGrabbed so AmmoSpawner can spawn new instance
         OnGrabbed?.Invoke(this);
     }
 

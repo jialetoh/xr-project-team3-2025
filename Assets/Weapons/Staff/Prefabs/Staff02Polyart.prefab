@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4051532076451886
 Transform:
   m_ObjectHideFlags: 0
@@ -109,17 +109,17 @@ MonoBehaviour:
   leftHandCastPoint: {fileID: 0}
   rightHandCastPoint: {fileID: 0}
   magicAudioSource: {fileID: 3615537260623830298}
-  singleFireballPrefab: {fileID: 4212548491855065723, guid: 10681f5371e22493285d422bcd6be2c6, type: 3}
-  aoeFireballPrefab: {fileID: 4212548491855065723, guid: 10681f5371e22493285d422bcd6be2c6, type: 3}
-  fireDartPrefab: {fileID: 4212548491855065723, guid: 10681f5371e22493285d422bcd6be2c6, type: 3}
-  fireArrowPrefab: {fileID: 4212548491855065723, guid: 10681f5371e22493285d422bcd6be2c6, type: 3}
+  singleFireballPrefab: {fileID: 2386159082878823987, guid: 2362f9aec9184e1408fb5a9ce224113d, type: 3}
+  aoeFireballPrefab: {fileID: 2386159082878823987, guid: 2362f9aec9184e1408fb5a9ce224113d, type: 3}
+  fireDartPrefab: {fileID: 2386159082878823987, guid: 2362f9aec9184e1408fb5a9ce224113d, type: 3}
+  fireArrowPrefab: {fileID: 2386159082878823987, guid: 2362f9aec9184e1408fb5a9ce224113d, type: 3}
   singleFireballSpeed: 30
   aoeFireballSpeed: 20
   fireDartSpeed: 50
   fireArrowSpeed: 40
   maxChargeTime: 2
   chargeMultiplier: 2
-  castClip: {fileID: 0}
+  castClip: {fileID: 8300000, guid: da396a16a7f24f64cbb0054f5a56b46a, type: 3}
   chargeClip: {fileID: 0}
   releaseClip: {fileID: 0}
   modeChangeClip: {fileID: 0}

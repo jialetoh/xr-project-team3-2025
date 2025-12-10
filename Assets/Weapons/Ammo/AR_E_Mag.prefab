@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531799800421157526}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AmmoInteractable
   spawnPoint: {fileID: 0}
   snapDistance: 0.1
-  ammoCount: 12
+  ammoCount: 50
   audioSource: {fileID: 4356323319016215204}
   grabClip: {fileID: 8300000, guid: 295061726de16f44cb796538bc5d0e5e, type: 3}
   insertClip: {fileID: 8300000, guid: c95a4c06824c5eb40add0dc0343ddbf3, type: 3}

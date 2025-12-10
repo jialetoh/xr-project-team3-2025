@@ -1240,7 +1240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6426748193963099151
 Transform:
   m_ObjectHideFlags: 0
@@ -1288,7 +1288,7 @@ MonoBehaviour:
   magazineSize: 60
   ammoInMagazine: 60
   ammoReserve: 120
-  grabbableAmmoPrefab: {fileID: 0}
+  grabbableAmmoPrefab: {fileID: 3696409751818252237, guid: f0c07ae1f6bef4a1481b61c044cfcffc, type: 3}
   ammoInsertPoint: {fileID: 111248497637695585}
   magazineVisual: {fileID: 3457886949980906921}
   magazineEjectForce: 0.5
