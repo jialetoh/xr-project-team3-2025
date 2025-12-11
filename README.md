@@ -33,10 +33,17 @@ BoxHeadVR is an immersive VR survival shooter where players must defend themselv
   <p><i>Face off against regular zombies and powerful boss enemies</i></p>
 </div>
 
+### Game Environment
+
+<div align="center">
+  <img src="Images/Map.png" alt="Game Map" width="700"/>
+  <p><i>Battle through intense arena environments</i></p>
+</div>
+
 ### Features
 
-- **VR Combat System**: Use hand tracking and controllers to wield weapons
-- **Multiple Weapon Types**: Including fireballs, guns, and melee weapons
+- **VR Combat System**: Use controllers to wield weapons
+- **Multiple Weapon Types**: Including Magic Staff, guns, and melee weapons
 - **Enemy AI**: Fight against intelligent enemy waves with navigation
 - **Immersive Environment**: Fully 3D environments optimized for VR
 - **Audio Feedback**: Spatial audio for enhanced immersion
@@ -61,19 +68,13 @@ BoxHeadVR is an immersive VR survival shooter where players must defend themselv
    cd xr-project-team3-2025
    ```
 
-2. **Checkout the Correct Branch**
-
-   ```bash
-   git checkout uncorrupted-project
-   ```
-
-3. **Open in Unity**
+2. **Open in Unity**
 
    - Launch Unity Hub
    - Click "Add" and select the cloned project folder
    - Open the project (Unity will import assets on first launch)
 
-4. **Configure Build Settings**
+3. **Configure Build Settings**
    - Go to `File > Build Settings`
    - Select `Android` as the platform
    - Click "Switch Platform" if not already on Android
