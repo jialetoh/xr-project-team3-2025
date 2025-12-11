@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0131e4d3c3ce4305ab344be6a43a4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  Player: {fileID: 1928389238801210310, guid: 0ba88b23b077d354ba94e3d1c4f22966, type: 3}
-  NumberOfEnemiesToSpawn: 2
+  Player: {fileID: 0}
+  NumberOfEnemiesToSpawn: 20
   SpawnDelay: 5
-  ContinuousSpawning: 0
+  ContinuousSpawning: 1
   WeightedEnemies:
   - {fileID: 11400000, guid: 38b5bbd3a284b43b181a459e5386296d, type: 2}
   - {fileID: 11400000, guid: f7deec1f7a60147f2be265ed80bdf043, type: 2}
