@@ -1,5 +1,7 @@
 # BoxHeadVR
 
+![BoxHeadVR Start Screen](Images/BoxheadVR_StartScreen.png)
+
 A virtual reality zombie survival game where you fight waves of enemies in an immersive VR environment. Built with Unity and Meta XR SDK for Quest 2/3 devices.
 
 **An XR Project by Team 3 for 50.052 Extended Reality**
@@ -20,6 +22,14 @@ A virtual reality zombie survival game where you fight waves of enemies in an im
 ## 🎮 About the Game
 
 BoxHeadVR is an immersive VR survival shooter where players must defend themselves against waves of enemies using various weapons. Experience intense combat in virtual reality with realistic hand interactions powered by Meta's Interaction SDK.
+
+### Enemy Types
+
+<div align="center">
+  <img src="Images/Zombie_Image.png" alt="Zombie Enemy" width="400"/>
+  <img src="Images/BossZombie_Image.png" alt="Boss Zombie" width="400"/>
+  <p><i>Face off against regular zombies and powerful boss enemies</i></p>
+</div>
 
 ### Features
 
