@@ -8,6 +8,8 @@ public class RightControllerInteractor : MonoBehaviour
     public List<Weapon> weaponPrefabs;
     [HideInInspector] public Weapon CurrentWeapon;
     private int currentWeaponIndex = 0;
+    private readonly Dictionary<int, WeaponState> _weaponStates = new();
+    private bool _isFirstEquip = true;
 
     [SerializeField] private float switchCooldown = 0.3f;
     [SerializeField] private float thumbstickThreshold = 0.1f;
@@ -15,9 +17,6 @@ public class RightControllerInteractor : MonoBehaviour
 
     public AmmoSpawner ammoSpawner;
     public event Action<Weapon> OnWeaponChanged;
-
-    private readonly Dictionary<int, WeaponState> _weaponStates = new();
-    private bool _isFirstEquip = true;
 
     private void Awake()
     {
