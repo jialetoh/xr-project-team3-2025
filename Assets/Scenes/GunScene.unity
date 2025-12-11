@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 0.64705884}
+  m_FogColor: {r: 0.08627451, g: 0.11372549, b: 0.14117648, a: 0.64705884}
   m_FogMode: 3
-  m_FogDensity: 0.2
+  m_FogDensity: 0.5
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -1171,6 +1171,10 @@ PrefabInstance:
     - target: {fileID: 1998183903275897915, guid: 4a59f0267d8b623469ade17fb634bc69, type: 3}
       propertyPath: m_Name
       value: Border_Folder
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783983921733013693, guid: 4a59f0267d8b623469ade17fb634bc69, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5783983921733013693, guid: 4a59f0267d8b623469ade17fb634bc69, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4739,8 +4743,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2317, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -2450, y: 80}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1508379583
 MonoBehaviour:
@@ -4762,7 +4766,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HP:'
+  m_text: HP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4789,8 +4793,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 200
+  m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
