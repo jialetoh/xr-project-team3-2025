@@ -23,6 +23,8 @@ A virtual reality zombie survival game where you fight waves of enemies in an im
 
 BoxHeadVR is an immersive VR survival shooter where players must defend themselves against waves of enemies using various weapons. Experience intense combat in virtual reality with realistic hand interactions powered by Meta's Interaction SDK.
 
+**Inspired by the classic Y8 flash game "Boxhead" created by Sean Cooper and developed by CrazyMonkeyGames.**
+
 ### Enemy Types
 
 <div align="center">
@@ -217,6 +219,7 @@ You can test basic functionality in the Unity Editor using:
 
 ### Special Thanks
 
+- **Sean Cooper & CrazyMonkeyGames** - For creating the original Boxhead flash game series that inspired this VR adaptation
 - **Team 3 Members** - For their dedication and hard work
 - **SUTD 50.052 Extended Reality Course, Professor Peng Song** - For guidance and support
 - **Unity Technologies** - For the game engine
