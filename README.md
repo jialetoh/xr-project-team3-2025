@@ -76,7 +76,7 @@ BoxHeadVR is an immersive VR survival shooter where players must defend themselv
 
 3. **Configure Build Settings**
    - Go to `File > Build Settings`
-   - Select `Android` as the platform
+   - Select `Meta Quest` as the platform
    - Click "Switch Platform" if not already on Android
    - Go to `Edit > Project Settings > XR Plug-in Management`
    - Enable "Oculus" under Android settings
