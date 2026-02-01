@@ -23,7 +23,7 @@ A virtual reality zombie survival game where you fight waves of enemies in an im
 
 BoxHeadVR is an immersive VR survival shooter where players must defend themselves against waves of enemies using various weapons. Experience intense combat in virtual reality with realistic hand interactions powered by Meta's Interaction SDK.
 
-**Inspired by the classic Y8 flash game "Boxhead" created by Sean Cooper and developed by CrazyMonkeyGames.**
+**Inspired by the classic Y8 flash game "Boxhead" created by Sean Cooper / developed by CrazyMonkeyGames.**
 
 ### Enemy Types
 
@@ -43,7 +43,7 @@ BoxHeadVR is an immersive VR survival shooter where players must defend themselv
 ### Features
 
 - **VR Combat System**: Use controllers to wield weapons
-- **Multiple Weapon Types**: Including Magic Staff, guns, and melee weapons
+- **Multiple Weapon Types**: Including magic staff, guns, and swords
 - **Enemy AI**: Fight against intelligent enemy waves with navigation
 - **Immersive Environment**: Fully 3D environments optimized for VR
 - **Audio Feedback**: Spatial audio for enhanced immersion
@@ -105,7 +105,7 @@ Survive waves of enemies by using various weapons and abilities. Eliminate threa
 ### Gameplay Loop
 
 1. **Start the Game**: Put on your VR headset and launch BoxHeadVR
-2. **Grab Weapons**: Use your controllers to handle your weapons
+2. **Swap Weapons**: Use your controllers to handle your weapons
 3. **Fight Enemies**: Aim and shoot at incoming enemies
 4. **Survive Waves**: Each wave gets progressively harder
 5. **Manage Resources**: Keep track of health
@@ -122,11 +122,11 @@ Survive waves of enemies by using various weapons and abilities. Eliminate threa
 
 ### Meta Quest Controllers
 
-- **Left Trigger**: Grab and interact with magazine
-- **right Trigger**: Fire weapon / Attack
+- **Left Trigger**: Grab and interact with magazine / Reload
+- **Right Trigger**: Fire weapon / Attack
 - **Right Grip Button**: Release magazine from gun
-- **Left Thumbstick**: Movement (if locomotion enabled)
-- **Right Thumbstick**: Panning (if locomotion enabled)
+- **Left Thumbstick**: Movement
+- **Right Thumbstick**: Left/Right to look around and Up/Down to cycle weapons
 - **A Button**: Jump
 - **Left Menu Button**: Pause
 
@@ -239,10 +239,10 @@ This project is created for educational purposes as part of the SUTD 50.052 Exte
 For questions or issues, please contact Team 3 or open an issue on the GitHub repository.
 
 **Repository**: [xr-project-team3-2025](https://github.com/jialetoh/xr-project-team3-2025)  
-**Branch**: uncorrupted-project
+**Branch**: Updated-Main
 
-**Team Members**: Austin Isaac, Clarence Lau, Toh Jia le, Zayne Siew
+**Team Members**: Austin Isaac, Clarence Lau, Toh Jia Le, Zayne Siew
 
 ---
 
-_Made with ❤️ in Virtual Reality_
+_Made with ❤️ in 50.052 Extended Reality_
