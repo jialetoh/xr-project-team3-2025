@@ -61,10 +61,12 @@ BoxHeadVR is an immersive VR survival shooter where players must defend themselv
 
 ### Installation
 
-1. **Clone the Repository**
+1. **Clone the Repository** 
 
+   Note: git lfs is required due to large asset files
+    
    ```bash
-   git clone https://github.com/jialetoh/xr-project-team3-2025.git
+   git lfs clone https://github.com/jialetoh/xr-project-team3-2025.git
    cd xr-project-team3-2025
    ```
 
