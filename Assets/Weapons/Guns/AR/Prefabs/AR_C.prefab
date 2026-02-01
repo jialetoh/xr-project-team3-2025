@@ -1091,7 +1091,7 @@ MonoBehaviour:
   pullTransform: {fileID: 0}
   restLocalPosition: {x: 0, y: 0.1125, z: 0.265}
   pulledLocalPosition: {x: 0, y: 0.1125, z: 0.1006}
-  pullThreshold: 0.9
+  pullThreshold: 0.4
   audioSource: {fileID: 3533689378246159752}
   pullableGrabbedClip: {fileID: 8300000, guid: b7405a53ba0893c45ba9f240d51605a2, type: 3}
   pullablePulledClip: {fileID: 8300000, guid: bb07a6d193240dc4dae633ff445991d9, type: 3}

@@ -483,7 +483,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.814
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -696,7 +696,7 @@ MonoBehaviour:
   pullTransform: {fileID: 0}
   restLocalPosition: {x: 0, y: 0.09547767, z: 0.1275}
   pulledLocalPosition: {x: 0, y: 0.0955, z: -0.0207}
-  pullThreshold: 0.9
+  pullThreshold: 0.4
   audioSource: {fileID: 6555710783797062694}
   pullableGrabbedClip: {fileID: 8300000, guid: b7405a53ba0893c45ba9f240d51605a2, type: 3}
   pullablePulledClip: {fileID: 8300000, guid: bb07a6d193240dc4dae633ff445991d9, type: 3}
