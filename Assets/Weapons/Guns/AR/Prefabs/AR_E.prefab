@@ -466,7 +466,7 @@ MonoBehaviour:
   ejectionForce: 2
   ejectionUpwardForce: 1
   pullableInteractable: {fileID: 8014973941947281976}
-  shootClip: {fileID: 8300000, guid: e206a564e54303e4792eefa02841b330, type: 3}
+  shootClip: {fileID: 8300000, guid: cd381f6073f4a8b44b199a6f8ab76aeb, type: 3}
   dryFireClip: {fileID: 8300000, guid: a7ff28da2786f184fbfa1c2b3bfe1963, type: 3}
   magEjectClip: {fileID: 8300000, guid: 39079858d5b2a684ab9a43d53e8ad212, type: 3}
   roundEjectClip: {fileID: 8300000, guid: a7ff28da2786f184fbfa1c2b3bfe1963, type: 3}
@@ -483,7 +483,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.814
+  m_Volume: 0.847
   m_Pitch: 1
   Loop: 0
   Mute: 0
