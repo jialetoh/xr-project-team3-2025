@@ -13,6 +13,10 @@ public static class GunInputHandler
 
     public static void HandleRightControllerInputs(GunWeapon gun)
     {
+        // Don't process weapon input when game is paused or game over
+        if (PauseMenuScript.GameIsPaused || GameOverManager.IsGameOver)
+            return;
+
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
             gun.OnPrimaryFireDown();
@@ -50,6 +54,10 @@ public static class GunInputHandler
     public static void HandleLeftControllerInputs(GunWeapon gun, LeftControllerRay ray)
     {
         if (gun == null || ray == null) return;
+
+        // Don't process weapon input when game is paused or game over
+        if (PauseMenuScript.GameIsPaused || GameOverManager.IsGameOver)
+            return;
 
         if (_grabbedAmmo != null || _grabbedPullable != null)
         {

@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 2763686004582612138}
   - component: {fileID: 1546833352357543653}
   - component: {fileID: 9185414906254933337}
+  - component: {fileID: 6404405760909804012}
   m_Layer: 13
   m_Name: Resume
   m_TagString: Untagged
@@ -172,6 +173,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6404405760909804012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838045180377770295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485f9909d86b44df3b4af29f81af5131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonHaptics
+  controller: 1
 --- !u!1 &1252047436921923540
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +350,7 @@ GameObject:
   - component: {fileID: 3832699796260935841}
   - component: {fileID: 6741661949775236157}
   - component: {fileID: 2808314508527299076}
+  - component: {fileID: 566324239740681254}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -445,6 +460,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &566324239740681254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2424269102864064830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485f9909d86b44df3b4af29f81af5131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonHaptics
+  controller: 1
 --- !u!1 &2465011581187962581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,6 +1199,7 @@ GameObject:
   - component: {fileID: 4929720005719759218}
   - component: {fileID: 3291923253773508180}
   - component: {fileID: 177836554547077074}
+  - component: {fileID: 5030970277532112172}
   m_Layer: 13
   m_Name: Exit
   m_TagString: Untagged
@@ -1292,6 +1321,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5030970277532112172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4496631702709715455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485f9909d86b44df3b4af29f81af5131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonHaptics
+  controller: 1
 --- !u!1 &4502985229495213539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,6 +1774,7 @@ GameObject:
   - component: {fileID: 7209399032474969113}
   - component: {fileID: 8258334222328339273}
   - component: {fileID: 9019390213697518540}
+  - component: {fileID: 7837251829098089434}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -1841,6 +1884,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7837251829098089434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418997982237327278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485f9909d86b44df3b4af29f81af5131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonHaptics
+  controller: 1
 --- !u!1 &6490076420525104856
 GameObject:
   m_ObjectHideFlags: 0
@@ -2620,6 +2676,7 @@ GameObject:
   - component: {fileID: 1386780226132547485}
   - component: {fileID: 1540219250789285249}
   - component: {fileID: 7093746382340159852}
+  - component: {fileID: 8145211390413020971}
   m_Layer: 13
   m_Name: Restart Button
   m_TagString: Untagged
@@ -2741,6 +2798,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8145211390413020971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8485562860990199745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485f9909d86b44df3b4af29f81af5131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonHaptics
+  controller: 1
 --- !u!1 &8582568156183472148
 GameObject:
   m_ObjectHideFlags: 0

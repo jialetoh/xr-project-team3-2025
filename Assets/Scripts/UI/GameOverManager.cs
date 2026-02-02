@@ -82,6 +82,12 @@ public class GameOverManager : MonoBehaviour
         isTimerRunning = false;
         IsGameOver = true; // Set static property
 
+        // Add strong haptic feedback for death/game over
+        HapticsManager.Instance?.PulseDamagedBoth();
+
+        // Stop background music
+        BackgroundMusicManager.Instance?.StopMusic();
+
         StartCoroutine(ShowGameOverScreen());
     }
 
@@ -140,6 +146,8 @@ public class GameOverManager : MonoBehaviour
 
     public void RestartGame()
     {
+        // Add haptic feedback for restarting
+        HapticsManager.Instance?.PulseUIPressLeft();
 
         isGameOver = false;
         isTimerRunning = true;

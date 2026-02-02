@@ -4,6 +4,10 @@ public static class MagicInputHandler
 {
     public static void HandleRightControllerInputs(MagicWeapon magic)
     {
+        // Don't process weapon input when game is paused or game over
+        if (PauseMenuScript.GameIsPaused || GameOverManager.IsGameOver)
+            return;
+
         // Right Index Trigger
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
@@ -27,6 +31,9 @@ public static class MagicInputHandler
 
     public static void HandleLeftControllerInputs(MagicWeapon magic, LeftControllerRay ray)
     {
+        // Don't process weapon input when game is paused or game over
+        if (PauseMenuScript.GameIsPaused || GameOverManager.IsGameOver)
+            return;
 
         // Left Index Trigger
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))

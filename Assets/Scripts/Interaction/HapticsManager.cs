@@ -6,27 +6,31 @@ public class HapticsManager : MonoBehaviour
     public static HapticsManager Instance { get; private set; }
 
     // Haptic presets
-    [Header("Preset Amplitudes")]
-    public float shootAmplitude = 0.7f;
-    public float dryFireAmplitude = 0.2f;
-    public float reloadAmplitude = 0.4f;
-    public float slideRackAmplitude = 0.4f;
-    public float meleeHitAmplitude = 0.5f;
-    public float magicCastAmplitude = 0.5f;
-    public float magicReleaseAmplitude = 0.7f;
-    public float interactAmplitude = 0.3f;
-    public float damagedAmplitude = 0.8f;
+    // Amplitudes
+    private float shootAmplitude = 0.7f;
+    private float dryFireAmplitude = 0.2f;
+    private float reloadAmplitude = 0.4f;
+    private float slideRackAmplitude = 0.4f;
+    private float meleeHitAmplitude = 0.5f;
+    private float magicCastAmplitude = 0.5f;
+    private float magicReleaseAmplitude = 0.7f;
+    private float interactAmplitude = 0.3f;
+    private float damagedAmplitude = 0.8f;
+    private float uiHoverAmplitude = 0.2f;
+    private float uiPressAmplitude = 0.5f;
 
-    [Header("Preset Durations")]
-    public float shootDuration = 0.1f;
-    public float dryFireDuration = 0.05f;
-    public float reloadDuration = 0.1f;
-    public float slideRackDuration = 0.06f;
-    public float meleeHitDuration = 0.08f;
-    public float magicCastDuration = 0.1f;
-    public float magicReleaseDuration = 0.15f;
-    public float interactDuration = 0.05f;
-    public float damagedDuration = 0.1f;
+    // Durations
+    private float shootDuration = 0.1f;
+    private float dryFireDuration = 0.05f;
+    private float reloadDuration = 0.1f;
+    private float slideRackDuration = 0.06f;
+    private float meleeHitDuration = 0.08f;
+    private float magicCastDuration = 0.1f;
+    private float magicReleaseDuration = 0.15f;
+    private float interactDuration = 0.05f;
+    private float damagedDuration = 0.5f;
+    private float uiHoverDuration = 0.03f;
+    private float uiPressDuration = 0.08f;
 
     private void Awake()
     {
@@ -139,5 +143,27 @@ public class HapticsManager : MonoBehaviour
     public void PulseDamagedBoth()
     {
         PulseBoth(damagedAmplitude, damagedDuration);
+    }
+
+    // UI haptics - Right controller (primary menu interaction)
+    public void PulseUIHoverRight()
+    {
+        PulseRight(uiHoverAmplitude, uiHoverDuration);
+    }
+
+    public void PulseUIPressRight()
+    {
+        PulseRight(uiPressAmplitude, uiPressDuration);
+    }
+
+    // UI haptics - Left controller (secondary menu interaction)
+    public void PulseUIHoverLeft()
+    {
+        PulseLeft(uiHoverAmplitude, uiHoverDuration);
+    }
+
+    public void PulseUIPressLeft()
+    {
+        PulseLeft(uiPressAmplitude, uiPressDuration);
     }
 }

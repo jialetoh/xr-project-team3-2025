@@ -1,25 +1,48 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class HapticPauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
+/// <summary>
+/// Haptic feedback component that triggers at the exact moment Unity changes button colors.
+/// Uses ISelectHandler for hover (when button becomes "highlighted") and IPointerDownHandler for press.
+/// </summary>
+public class HapticPauseMenu : MonoBehaviour, ISelectHandler, IPointerDownHandler
 {
-    public void OnPointerEnter(PointerEventData eventData)
+    private Selectable selectable;
+    private bool hasTriggeredHover = false;
+
+    private void Awake()
     {
-        // Light vibration on hover
-        OVRInput.SetControllerVibration(0.2f, 0.2f, OVRInput.Controller.RTouch);
-        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+        selectable = GetComponent<Selectable>();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    // Called when the button is selected/highlighted - this is when Unity changes to "Highlighted" color
+    public void OnSelect(BaseEventData eventData)
     {
-        // Stronger vibration on click
-        StartCoroutine(ClickHaptic());
+        if (selectable != null && selectable.interactable && !hasTriggeredHover)
+        {
+            hasTriggeredHover = true;
+            if (HapticsManager.Instance != null)
+            {
+                HapticsManager.Instance.PulseUIHoverLeft();
+            }
+        }
     }
 
-    private System.Collections.IEnumerator ClickHaptic()
+    // Called when pointer is pressed down - this is when Unity changes to "Pressed" color
+    public void OnPointerDown(PointerEventData eventData)
     {
-        OVRInput.SetControllerVibration(0.8f, 0.8f, OVRInput.Controller.RTouch);
-        yield return new WaitForSeconds(0.1f);
-        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+        if (selectable != null && selectable.interactable)
+        {
+            if (HapticsManager.Instance != null)
+            {
+                HapticsManager.Instance.PulseUIPressLeft();
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        hasTriggeredHover = false;
     }
 }

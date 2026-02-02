@@ -15,7 +15,7 @@ public class PauseMenuScript : MonoBehaviour
 
     // Pause state
     public static bool GameIsPaused { get; private set; } = false;
-    
+
     // Static input suppression
     private static float _inputSuppressedUntilRealtime = 0f;
 
@@ -72,6 +72,9 @@ public class PauseMenuScript : MonoBehaviour
         _inputSuppressedUntilRealtime = Time.realtimeSinceStartup + inputSuppressionDuration;
 
         OnPauseMenuStateChanged?.Invoke(false);
+
+        // Add haptic feedback for menu closing
+        HapticsManager.Instance?.PulseUIPressLeft();
     }
 
     public void Resume(InputAction.CallbackContext context)

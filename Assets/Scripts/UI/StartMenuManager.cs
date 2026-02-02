@@ -69,6 +69,9 @@ public class StartMenuManager : MonoBehaviour
     {
         if (gameStarted) return;
 
+        // Add haptic feedback for starting game
+        HapticsManager.Instance?.PulseUIPressLeft();
+
         gameStarted = true;
 
         if (startMenuPanel != null)
@@ -102,11 +105,17 @@ public class StartMenuManager : MonoBehaviour
         Time.timeScale = 1f;
 
         Debug.Log("Game Started!");
+
+        // Start background music
+        BackgroundMusicManager.Instance?.PlayMusic();
     }
 
 
     public void QuitGame()
     {
+        // Add haptic feedback for quitting
+        HapticsManager.Instance?.PulseUIPressLeft();
+
         Debug.Log("Quitting game...");
         Application.Quit();
 
