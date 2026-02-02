@@ -190,6 +190,7 @@ You can test basic functionality in the Unity Editor using:
 - **Watermelon Sword** (v1.0) - Weapon model
 - **Zombie Massacre Sound Effects Starter Pack** (v1.0) - Audio
 - **Zombie Sound Pack - Free Version** (v1.0) - Audio
+- **Atmospheric Horror Music by Moxie Music** - Background music
 
 #### Meta SDKs & Tools
 
