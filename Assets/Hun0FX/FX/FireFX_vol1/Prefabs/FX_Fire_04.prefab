@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5557362394125618976}
   - component: {fileID: 5557362394125618979}
   - component: {fileID: 5557362394125618978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FX_Fire_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}

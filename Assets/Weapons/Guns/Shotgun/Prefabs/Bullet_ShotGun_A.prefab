@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f8786aadfab4ddc9834e4ac6d3065f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  damage: 20
+  damage: 30
   lifetime: 5
   projectileAudioSource: {fileID: 4952470654319829707}
   impactClip: {fileID: 8300000, guid: e1c46311240d04071ad00f2e40cc164e, type: 3}
@@ -256,5 +256,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.015
+  m_Radius: 0.02
   m_Center: {x: 0, y: 0, z: 0}

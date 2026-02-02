@@ -89,7 +89,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -218,7 +218,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -513,3 +513,5 @@ MonoBehaviour:
   impactVolumeMin: 0.8
   impactVolumeMax: 1
   dragSound: {fileID: 0}
+  swingStartupDelay: 0.15
+  debugSwingDetection: 0

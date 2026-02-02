@@ -5106,6 +5106,8 @@ MonoBehaviour:
   impactVolumeMin: 0.8
   impactVolumeMax: 1
   dragSound: {fileID: 8300000, guid: ffa0c8a696cdd0e4493de637049e456d, type: 3}
+  swingStartupDelay: 0.15
+  debugSwingDetection: 0
 --- !u!1 &1693438405931276
 GameObject:
   m_ObjectHideFlags: 0
@@ -10053,7 +10055,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -10182,7 +10184,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -10311,7 +10313,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
