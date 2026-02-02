@@ -117,6 +117,9 @@ public class Enemy : PoolableObject, IDamageable
             StopCoroutine(LookCoroutine);
         }
 
+        // Stop all attacks immediately
+        AttackRadius.Reset();
+
         TryGetComponent(out Collider collider);
         if (collider != null && collider.isTrigger)
             collider.enabled = false;
