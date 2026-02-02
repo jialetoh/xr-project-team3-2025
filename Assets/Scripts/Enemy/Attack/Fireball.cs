@@ -17,13 +17,17 @@ public class Fireball : PoolableObject
     public Rigidbody Rigidbody;
 
     [Header("Visual Effects")]
-    [Tooltip("Visual Effects Graph asset for explosion effect.")]
+    [Tooltip("Pooled explosion VFX prefab (PoolableObject with VisualEffect component).")]
+    public PoolableObject ExplosionVFXPrefab;
+    [Tooltip("Visual Effects Graph asset for explosion effect (legacy - use ExplosionVFXPrefab instead).")]
     public VisualEffectAsset ExplosionVFXAsset;
     [Tooltip("Trail renderers for the fireball.")]
     private TrailRenderer[] TrailRenderers;
     [Tooltip("Duration of the explosion animation.")]
     [SerializeField]
     private float ExplosionAnimationDuration = 1.5f;
+
+    private static ObjectPool _explosionPool;
 
     [Header("Audio")]
     [Tooltip("The AudioSource component for playing fireball sounds.")]
@@ -60,23 +64,58 @@ public class Fireball : PoolableObject
         PlayExplosionEffect();
         PlayExplosionSound();
 
-        Disable();
+        // Delay disable to allow explosion sound to play
+        // Use ExplosionAnimationDuration or a minimum delay for the sound
+        float disableDelay = Mathf.Max(ExplosionAnimationDuration, 0.5f);
+        Invoke(DISABLE_METHOD_NAME, disableDelay);
     }
     private void PlayExplosionEffect()
     {
-        if (ExplosionVFXAsset != null)
+        // Use pooled explosion prefab if available (optimized)
+        if (ExplosionVFXPrefab != null)
         {
-            // Create a temporary GameObject for the explosion effect
+            // Initialize pool on first use
+            if (_explosionPool == null)
+            {
+                _explosionPool = ObjectPool.CreateInstance(ExplosionVFXPrefab, 10);
+            }
+
+            // Get pooled explosion VFX
+            PoolableObject explosionVFX = _explosionPool.GetObject();
+            explosionVFX.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+            // Play the VFX if it has a VisualEffect component
+            if (explosionVFX.TryGetComponent<VisualEffect>(out var vfx))
+            {
+                vfx.Play();
+            }
+
+            // Return to pool after animation completes
+            if (explosionVFX.gameObject.activeSelf)
+            {
+                StartCoroutine(DisableAfterDelay(explosionVFX.gameObject, ExplosionAnimationDuration));
+            }
+        }
+        // Legacy fallback: Use VisualEffectAsset (creates new GameObject - not optimized)
+        else if (ExplosionVFXAsset != null)
+        {
             GameObject vfxObject = new("FireballExplosion");
             vfxObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
 
-            // Add and configure the VisualEffect component
             VisualEffect vfx = vfxObject.AddComponent<VisualEffect>();
             vfx.visualEffectAsset = ExplosionVFXAsset;
 
-            // Play the effect and destroy after duration
             vfx.Play();
             Destroy(vfxObject, ExplosionAnimationDuration);
+        }
+    }
+
+    private System.Collections.IEnumerator DisableAfterDelay(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (obj != null)
+        {
+            obj.SetActive(false);
         }
     }
 
@@ -98,11 +137,10 @@ public class Fireball : PoolableObject
 
     private void PlayExplosionSound()
     {
-        // _audioSource.Stop();
-        // if (_audioSource != null && ExplosionSound != null)
-        // {
-        //     _audioSource.PlayOneShot(ExplosionSound);
-        // }
+        if (_audioSource != null && ExplosionSound != null)
+        {
+            _audioSource.PlayOneShot(ExplosionSound);
+        }
         return;
     }
 
